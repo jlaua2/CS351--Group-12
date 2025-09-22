@@ -22,8 +22,13 @@
 # Communication  
 
 **Q3a:** How can your group communicate when doing the Full Stack Group Project?  
+We can use discord/Imessage to communicate what we're working on and planning to accomplish throughout the semester.
+
 **Q3b:** What are the usernames of each group member on that platform?  
+Joel, Javi, Michael, Anthony
+
 **Q3c:** What is your group’s expected response time to messages?  
+1-2 Hour Response time
 
 **Example:**  
 *We will use Discord for communication*  
@@ -39,7 +44,9 @@
 # Norms  
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
+We will reach out as a group to those who are having a dissagreement and find balance with a vote.
 **Q4b:** How will your group handle situations when a member is not contributing enough?  
+If a certain team member isn't pulling their weight, the team will give a reminder of their duties and make sure progress is being made that day. If they continue to not do their role in the project we will meet in person to discuss a better way to resolve the issue.
 
 **Example:**  
 *If there is a disagreement on direction, we will resolve it with a unanimous vote.*  
@@ -51,6 +58,7 @@
 # Roles  
 
 **Q5:** How will your group divide your role in the Group Project?  
+Joel - Frontend?, Javi - , Michael - , Anthony - 
 
 **Example:**  
 *Mauricio - Backend, Justin - Project Lead, Claudia - Frontend.*  
