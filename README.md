@@ -34,7 +34,7 @@ Javi - Javi
 
 Michael - ninjamero
 
-Anthony - tonerbtw
+Anthony - tonerbtw 
 
 **Q3c:** What is your group’s expected response time to messages?  
 
