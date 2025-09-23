@@ -72,27 +72,35 @@ Joel - Frontend, Javi - Backend , Michael - Frontend, Anthony - Backend
 Django + React
 
 ---
-# Full Stack Group Project Track  
+# Full Stack Group Project Track - Price Comparison App
 ---
-
 
 
 # Track 2: Technology for Public Goods 
 
 **Problem 2:**
 
+Many Chicago neighborhoods struggle with food insecurity and lack of affordable, nutritious food options. Residents often don’t know where to find nearby food pantries, farmers’ markets, or community kitchens, making it difficult to access healthy meals.
+
 **Solution 2:** 
+
+A food resource locator app that maps nearby pantries and markets. Features include real-time pantry hours, dietary filters, and a community board where neighbors can share surplus food. This solution promotes accessibility, reduces food waste, and helps residents find nutritious meals.
 
 **Problem 3:** 
 
+Students and community members often face difficulty in finding affordable prices for everyday items across different stores and online retailers. Without a reliable way to compare options, people may overpay or waste time checking multiple platforms.
+
 **Solution 3:**  
+
+A price comparison app that aggregates data from online and in-store retailers. Users can search for a product, and the app will show the lowest available price along with store availability, shipping details, and discounts. This solution saves money, supports informed decision-making, and increases accessibility to affordable goods.
 
 --- 
 
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
-We are going with Technology for Public Goods
+
+From the five project ideas we developed, we are going forward with the price comparison app under Technology for Public Goods. We chose this project because affordability and cost-of-living are pressing issues that impact nearly every community. By helping people find the lowest prices, the app directly improves financial accessibility and reduces unnecessary spending. It is also practical to implement with available APIs, has clear usability for the community, and creates a meaningful social impact by making everyday goods more affordable.
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
 
