@@ -102,10 +102,30 @@ We are going with Technology for Public Goods
 
 **Q5: What authentication method will you use (e.g., username/password, OAuth, JWT)?**
 
+Our team can use a web token for authentication. Users will log in with a username and password, and if successful, the server will generate a signed web token that clients can use in subsequent requests.
+
+
 **Q6: How will you store and protect sensitive user data (e.g., passwords, tokens)?**
+
+Passwords will never be stored in plain text. Instead, I will hash them using a secure algorithm
+
+API keys, and tokens will be stored in environment variables
+
+HTTPS will be secured so tokens and passwords are always encrypted in transit.
 
 ## Deployment
 
 **Q7: Where will you deploy your project (e.g., Heroku, AWS, Render)? How will you manage environment variables and secrets during deployment?**
 
+I plan to deploy on Render. Environment variables and secrets will be managed using the platform’s built-in secret manager
+
 **Q8: How will you ensure your deployment is reliable and easy to update?**
+
+we will use CI/CD pipelines (GitHub Actions) to automatically test and deploy changes
+
+The deployment will be contained using Docker for consistency across environments
+
+we will use logging, and monitoring to detect downtime
+
+For updates, we’ll implement zero downtime deployments so the app remains available while pushing new versions
+
