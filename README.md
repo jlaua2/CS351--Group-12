@@ -51,27 +51,21 @@ If a certain team member isn't pulling their weight, the team will give a remind
 # Roles  
 
 **Q5:** How will your group divide your role in the Group Project?  
-Joel - Frontend?, Javi - , Michael - , Anthony - 
+Joel - Frontend, Javi - Backend , Michael - Frontend, Anthony - Backend
 
-**Example:**  
-*Mauricio - Backend, Justin - Project Lead, Claudia - Frontend.*  
 
 ---
 
 # Tech Stacks
 
 **Q6:** Which tech stacks will your group use? (Django + React or Flask + React)
+Django + React
 
 ---
 # Full Stack Group Project Track  
 ---
 
-# Track 1: Tackling Generative AI Consequences
-**Problem 1:** 
 
-**Solution 1:** 
-
----
 
 # Track 2: Technology for Public Goods 
 
@@ -83,20 +77,12 @@ Joel - Frontend?, Javi - , Michael - , Anthony -
 
 **Solution 3:**  
 
-# Track 3: Creative Coding and Cultural Expression
-
-**Idea - Story - Inspiration 4:**
-
-**Implementation 4:**
-
-**Idea - Story - Inspiration 5:**
-
-**Implementation 5:**
-
+--- 
 
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
+We are going with Technology for Public Goods
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
 
