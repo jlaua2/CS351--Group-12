@@ -27,7 +27,7 @@ We can use discord/Imessage to communicate what we're working on and planning to
 Joel - BlackŁotus
 Javi - Javi
 Michael - ninjamero
-Anthony - toner
+Anthony - tonerbtw
 
 **Q3c:** What is your group’s expected response time to messages?  
 1-2 Hour Response time
