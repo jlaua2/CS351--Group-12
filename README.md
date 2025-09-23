@@ -9,7 +9,7 @@ Our weekly meeting will be Thursday 8-9pm.
 
 # Timeline: Weekly Meeting Goals  
 
-**Q2:** What is your goals that your group want to achieve in each weekly meeting?  
+**Q2:** What are your goals that your group want to achieve in each weekly meeting?  
 
 The goal of the weekly meeting is to track where we are in the development cycle and see if we are ahead or behind schedule and adjust accordingly. Also this time would be a place for us to discuss any problems we are running in to.
 
@@ -17,7 +17,7 @@ During week of 9/21: Divide up tasks and discuss which project idea we are going
 
 Prior to 9/28: Meet together weekly to target project weakpoints/bugs and possibly visit office hours to get guidance if the progress feels weak. 
 
-During week of 10/02: Submit Milestone 2 and make sure we are good to go on our plan/schedule
+During week of 10/2: Submit Milestone 2 and make sure we are good to go on our plan/schedule
 
 ---
 
@@ -108,7 +108,7 @@ From the five project ideas we developed, we are going forward with the price co
 
 **Q1: What database are you using for your project (SQLite, PostgreSQL, noSQL, MongoDB,...), and why do you choose it?**
 
-We will use SQLite for development since we are familiar with it from CS341. Our database will store user accounts, cached API results, and product search history. While APIs provide much of the data, the database ensures quick access to frequently used information. For scability, we may later migrate to PostgreSQL.
+We will use SQLite for development since we are familiar with it from CS 341. Our database will store user accounts, cached API results, and product search history. While APIs provide much of the data, the database ensures quick access to frequently used information. For scability, we may later migrate to PostgreSQL.
 
 **Q2: How will database be helpful to your project? How will you design your database to support your application features?**
 
