@@ -46,12 +46,12 @@ Anthony - tonerbtw
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
 
-We will reach out as a group to those who are having a dissagreement and find balance with a vote.
+We will first have an open discussion to understand every group member's persepctive. If no agreement is reached, we will vote. If the vote is tied or unresolved, we will involve the professor or a TA as a neutral mediator.
 
 **Q4b:** How will your group handle situations when a member is not contributing enough?  
 
-If a certain team member isn't pulling their weight, the team will give a reminder of their duties and make sure progress is being made that day. If they continue to not do their role in the project we will meet in person to discuss a better way to resolve the issue.
-
+If a member is not contributing, we will check in with them privately and as a group to identify obstacles.
+If issues continue, we will set clear expectations and deadlines. If there is still no improvement, we will meet in person to agree on next steps, which may include redistrubting tasks or involving the professor.
 
 
 ---
@@ -60,7 +60,7 @@ If a certain team member isn't pulling their weight, the team will give a remind
 
 **Q5:** How will your group divide your role in the Group Project?  
 
-Joel - Frontend, Javi - Backend , Michael - Frontend, Anthony - Backend
+Joel - Frontend (UI components, styling, integrating APIs into UI), Javi - Backend (database setup authentication, API endpoints) , Michael - Frontend (search feature, filtering logic, interactive elements), Anthony - Backend (API integration, caching, deployment setup)
 
 
 ---
@@ -108,11 +108,11 @@ From the five project ideas we developed, we are going forward with the price co
 
 **Q1: What database are you using for your project (SQLite, PostgreSQL, noSQL, MongoDB,...), and why do you choose it?**
 
-We will be usiing SQLite as we are more comfortable using this after taking CS341. Also if we end up using API we may not have to use SQL for all the data.
+We will use SQLite for development since we are familiar with it from CS341. Our database will store user accounts, cached API results, and product search history. While APIs provide much of the data, the database ensures quick access to frequently used information. For scability, we may later migrate to PostgreSQL.
 
 **Q2: How will database be helpful to your project? How will you design your database to support your application features?**
 
-Databases will be helpful for our project because it will help store all of the data so we can half quick access to it. However if we end up using alot of API's from stores we might not need databases.
+Databases will be helpful for our project because it will help store all of the data so we can half quick access to it. However if we end up using a lot of API's from stores we might not need databases.
 
 ## Third-Party API Integration
 
@@ -181,7 +181,7 @@ Our team can use a web token for authentication. Users will log in with a userna
 
 **Q6: How will you store and protect sensitive user data (e.g., passwords, tokens)?**
 
-Passwords will never be stored in plain text. Instead, I will hash them using a secure algorithm
+Passwords will never be stored in plain text. Instead, we will hash them using a secure algorithm
 
 API keys, and tokens will be stored in environment variables
 
@@ -195,11 +195,11 @@ I plan to deploy on Render. Environment variables and secrets will be managed us
 
 **Q8: How will you ensure your deployment is reliable and easy to update?**
 
-we will use CI/CD pipelines (GitHub Actions) to automatically test and deploy changes
+We will use CI/CD pipelines (GitHub Actions) to automatically test and deploy changes
 
 The deployment will be contained using Docker for consistency across environments
 
-we will use logging, and monitoring to detect downtime
+We will use logging, and monitoring to detect downtime
 
 For updates, we’ll implement zero downtime deployments so the app remains available while pushing new versions
 
