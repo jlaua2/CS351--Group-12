@@ -10,11 +10,14 @@ Our weekly meeting will be Thursday 8-9pm.
 # Timeline: Weekly Meeting Goals  
 
 **Q2:** What is your goals that your group want to achieve in each weekly meeting?  
+
 The goal of the weekly meeting is to track where we are in the development cycle and see if we are ahead or behind schedule and adjust accordingly. Also this time would be a place for us to discuss any problems we are running in to.
 
-*During week of 9/21:* Divide up tasks and discuss which project idea we are going to go with.
+During week of 9/21: Divide up tasks and discuss which project idea we are going to go with.
 
-*Prior to 9/28: Meet together weekly to target project weakpoints/bugs and possibly visit office hours to get guidance if the progress feels weak.*  
+Prior to 9/28: Meet together weekly to target project weakpoints/bugs and possibly visit office hours to get guidance if the progress feels weak. 
+
+During week of 10/02: Submit Milestone 2 and make sure we are good to go on our plan/schedule
 
 ---
 
