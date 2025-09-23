@@ -57,6 +57,7 @@ If a certain team member isn't pulling their weight, the team will give a remind
 # Roles  
 
 **Q5:** How will your group divide your role in the Group Project?  
+
 Joel - Frontend, Javi - Backend , Michael - Frontend, Anthony - Backend
 
 
