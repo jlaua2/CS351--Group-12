@@ -25,7 +25,7 @@ During week of 10/02: Submit Milestone 2 and make sure we are good to go on our 
 
 **Q3a:** How can your group communicate when doing the Full Stack Group Project?  
 
-We can use Discord/Imessage to communicate what we're working on and planning to accomplish throughout the semester.
+We can use Discord/iMessage to communicate what we're working on and planning to accomplish throughout the semester.
 
 **Q3b:** What are the usernames of each group member on that platform?  
 Joel - BlackŁotus
