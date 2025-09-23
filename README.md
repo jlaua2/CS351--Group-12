@@ -1,6 +1,7 @@
 # Logistics  
 
 **Q1:** At what time in the week would your group be available to meet online?  
+
 We are available to meet online on weekends after 6pm, as well as from 8pm-9pm on Thursdays.  
 Our weekly meeting will be Thursday 8-9pm. 
 
@@ -21,6 +22,7 @@ Our weekly meeting will be Thursday 8-9pm.
 # Communication  
 
 **Q3a:** How can your group communicate when doing the Full Stack Group Project?  
+
 We can use discord/Imessage to communicate what we're working on and planning to accomplish throughout the semester.
 
 **Q3b:** What are the usernames of each group member on that platform?  
@@ -33,6 +35,7 @@ Michael - ninjamero
 Anthony - tonerbtw
 
 **Q3c:** What is your group’s expected response time to messages?  
+
 1-2 Hour Response time
 
 ---
@@ -40,14 +43,14 @@ Anthony - tonerbtw
 # Norms  
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
+
 We will reach out as a group to those who are having a dissagreement and find balance with a vote.
+
 **Q4b:** How will your group handle situations when a member is not contributing enough?  
+
 If a certain team member isn't pulling their weight, the team will give a reminder of their duties and make sure progress is being made that day. If they continue to not do their role in the project we will meet in person to discuss a better way to resolve the issue.
 
-**Example:**  
-*If there is a disagreement on direction, we will resolve it with a unanimous vote.*  
-*If team members do not pull their weight, the team will politely remind them of their duties.*  
-*If they continue to not pull their weight, then they will get another warning and a chance to start being more productive.*  
+
 
 ---
 
