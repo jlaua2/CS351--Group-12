@@ -25,8 +25,11 @@ We can use discord/Imessage to communicate what we're working on and planning to
 
 **Q3b:** What are the usernames of each group member on that platform?  
 Joel - BlackŁotus
+
 Javi - Javi
+
 Michael - ninjamero
+
 Anthony - tonerbtw
 
 **Q3c:** What is your group’s expected response time to messages?  
@@ -59,6 +62,7 @@ Joel - Frontend, Javi - Backend , Michael - Frontend, Anthony - Backend
 # Tech Stacks
 
 **Q6:** Which tech stacks will your group use? (Django + React or Flask + React)
+
 Django + React
 
 ---
