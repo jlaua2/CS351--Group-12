@@ -100,13 +100,69 @@ We are going with Technology for Public Goods
 
 **Q1: What database are you using for your project (SQLite, PostgreSQL, noSQL, MongoDB,...), and why do you choose it?**
 
+We will be usiing SQLite as we are more comfortable using this after taking CS341. Also if we end up using API we may not have to use SQL for all the data.
+
 **Q2: How will database be helpful to your project? How will you design your database to support your application features?**
+
+Databases will be helpful for our project because it will help store all of the data so we can half quick access to it. However if we end up using alot of API's from stores we might not need databases.
 
 ## Third-Party API Integration
 
 **Q3: Which third-party API(s) will you integrate into your project? What data will you pull from the API(s), and how will you use it in your application?**
+We will integrate product and pricing APIs from major online retailers and affiliate networks. Some candidates include:
+
+Amazon Product Advertising API – provides product details, prices, and availability.
+
+Walmart Product Lookup API – allows search for items sold in Walmart stores and online.
+
+Best Buy API – returns product catalog data including prices, availability, and reviews.
+
+Target API / Web Scraping with SerpApi – for Target store products if a public API is unavailable.
+
+PriceRunner / PriceSpider APIs (optional) – meta price-comparison services that aggregate multiple retailers.
+
+Data we will pull:
+
+Product names, prices, and discounts.
+
+Store/retailer availability (in stock / out of stock).
+
+Links to product pages for purchase.
+
+Optional: shipping cost and delivery time (if provided).
+
+Usage in the app:
+
+When a user searches for a product, the app queries multiple APIs.
+
+Results are aggregated, normalized, and sorted by lowest total price (including shipping, when possible).
+
+Users can filter by online vs in-store availability.
+
+Clicking on a result redirects to the retailer’s product page.
+
 
 **Q4: Does your API key has limitations such as rate limits or downtime? How are you going to deal with that?**
+
+Yes — most product APIs have rate limits, quota restrictions, or occasional downtime. For example:
+
+Amazon PA API limits the number of requests per day
+
+Walmart and Best Buy APIs may restrict requests per second
+
+APIs can also experience downtime or return incomplete data.
+
+Our approach to handling these limitations:
+
+Caching Layer: Store frequent queries (e.g., popular products) in our database to reduce repeated API calls.
+
+Request Throttling: Implement rate-limit handling by queuing requests and retrying with exponential backoff.
+
+Fallbacks: If one API is unavailable, show results from the others so the user still gets useful comparisons.
+
+API Key Management: Use multiple keys if allowed, and monitor usage with logging to avoid hitting limits.
+
+Graceful Errors: If APIs fail, display a friendly message (“Some results may be missing, try again later”) instead of breaking the app.
 
 ## Authentication and Security
 
