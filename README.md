@@ -38,7 +38,7 @@ Anthony - tonerbtw
 
 **Q3c:** What is your group’s expected response time to messages?  
 
-1-2 Hour Response time
+1-2 Hour Response Time
 
 ---
 
