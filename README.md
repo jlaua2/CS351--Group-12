@@ -191,7 +191,7 @@ HTTPS will be secured so tokens and passwords are always encrypted in transit.
 
 **Q7: Where will you deploy your project (e.g., Heroku, AWS, Render)? How will you manage environment variables and secrets during deployment?**
 
-I plan to deploy on Render. Environment variables and secrets will be managed using the platform’s built-in secret manager
+We plan to deploy on Render. Environment variables and secrets will be managed using the platform’s built-in secret manager
 
 **Q8: How will you ensure your deployment is reliable and easy to update?**
 
