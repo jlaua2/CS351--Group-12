@@ -75,10 +75,11 @@ Django + React
 # Full Stack Group Project Track
 ---
 
-Track 1: Tackling Generative AI Consequences
-Problem 1: here
+# Track 1: Tackling Generative AI Consequences
 
-Solution 1: 
+**Problem 1:**
+
+**Solution 1:**
 
 ---
 
@@ -101,14 +102,27 @@ Students and community members often face difficulty in finding affordable price
 A price comparison app that aggregates data from online and in-store retailers. Users can search for a product, and the app will show the lowest available price along with store availability, shipping details, and discounts. This solution saves money, supports informed decision-making, and increases accessibility to affordable goods.
 
 --- 
-Track 3: Creative Coding and Cultural Expression
-Idea - Story - Inspiration 4:
+# Track 3: Creative Coding and Cultural Expression
 
-Implementation 4:
+**Idea - Story - Inspiration 4:**
 
-Idea - Story - Inspiration 5:
+Immigrant Journey
 
-Implementation 5:
+This idea draws from the experiences of first and second generation immigrants in Chicago who often grow up navigating two worlds of heritage culture and contemporary city life. Many students rarely hear the intimate stories behind their neighbors' or classmates' journeys. The project's goal is to use technology to let users step into these personal narratives and understand how cultural identity is carried, changed, and expressed across generations.
+
+**Implementation 4:**
+
+Develop an interactive map-based web platform whwewre users can explore immigrant stories tied to specific neighborhoods and landmarks in Chicago.
+
+Clicking on a location opens a multimedia vignette. It will have audio clips of archival photos, audio clips of oral histories, archival photos, and short narrative texts about families who arrived from different countries.
+
+Include a story-chain feature that allows users to add a memory that links to an existing story, showing the continuinty of cultural presence over time.
+
+The app highlights the cultural context behind foods, languages, and traditions in those areas, making it a living cultural storytelling map rather than just a history record.
+
+**Idea - Story - Inspiration 5:**
+
+**Implementation 5:**
 
 ---
 
