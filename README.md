@@ -72,9 +72,15 @@ Joel - Frontend (UI components, styling, integrating APIs into UI), Javi - Backe
 Django + React
 
 ---
-# Full Stack Group Project Track - Price Comparison App
+# Full Stack Group Project Track
 ---
 
+Track 1: Tackling Generative AI Consequences
+Problem 1: 
+
+Solution 1: 
+
+---
 
 # Track 2: Technology for Public Goods 
 
@@ -95,6 +101,16 @@ Students and community members often face difficulty in finding affordable price
 A price comparison app that aggregates data from online and in-store retailers. Users can search for a product, and the app will show the lowest available price along with store availability, shipping details, and discounts. This solution saves money, supports informed decision-making, and increases accessibility to affordable goods.
 
 --- 
+Track 3: Creative Coding and Cultural Expression
+Idea - Story - Inspiration 4:
+
+Implementation 4:
+
+Idea - Story - Inspiration 5:
+
+Implementation 5:
+
+---
 
 # Idea Finalization
 
