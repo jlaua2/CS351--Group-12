@@ -130,7 +130,7 @@ Create an interactive audio visual installation or web experience where users ca
 
 Each sound clip comes with a short story card explaining its cultural background and the memories it evokes.
 
-As users mix the sounds, a dynamic visualization evolvers. Colors, patterns, and animated motifs drawn from the associated culture respond to the rhythm and layers chosen.
+As users mix the sounds, a dynamic visualization evolvers. The colors, patterns, and animated motifs drawn from the associated culture respond to the rhythm and layers chosen.
 
 The final composition can be saved or shared as a "cultural landscape" with the goal of telling a story through sound.
 
