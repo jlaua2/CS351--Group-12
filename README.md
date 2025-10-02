@@ -93,7 +93,7 @@ By implementing this solution, the project combines technical skills in full sta
 
 **Problem 2:**
 
-Food insecurity continues to be a serious issue across many Chicago neighborhoods, particularly in communities that qualify as food deserts. Residents in these areas often lack access to affordable and nutritious food, relying instead on convenience stores or fast food chains that do not provide healthy options. While food pantries, farmers’ markets, and community kitchens do exist, residents frequently struggle to find accurate, up-to-date information about where these resources are located, their operating hours, or the types of food they offer. This lack of visibility creates barriers to accessing healthy meals and prevents communities from making the most of available resources.
+Food insecurity continues to be a serious issue across many Chicago low income households, particularly in communities that qualify as food deserts. Residents in these areas often lack access to affordable and nutritious food, relying instead on convenience stores or fast food chains that do not provide healthy options. While food pantries, farmers’ markets, and community kitchens do exist, residents frequently struggle to find accurate, up-to-date information about where these resources are located, their operating hours, or the types of food they offer. This lack of visibility creates barriers to accessing healthy meals and prevents communities from making the most of available resources.
 
 **Solution 2:** 
 
