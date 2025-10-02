@@ -146,7 +146,16 @@ The final composition can be saved or shared as a "cultural landscape" with the 
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
 
-From the five project ideas we developed, we are going forward with the price comparison app under Technology for Public Goods. We chose this project because affordability and cost-of-living are pressing issues that impact nearly every community. By helping people find the lowest prices, the app directly improves financial accessibility and reduces unnecessary spending. It is also practical to implement with available APIs, has clear usability for the community, and creates a meaningful social impact by making everyday goods more affordable.
+From the five project ideas we developed, our group has decided to move forward with the price comparison app under Technology for Public Goods. After careful consideration, we believe this project not only addresses a widespread and meaningful social problem but is also technically feasible for our team to implement within the scope of the semester.
+
+We chose this project because affordability and cost-of-living are pressing challenges that affect nearly every community, especially students, low-income households, and families trying to manage their budgets. Prices for everyday goods—such as groceries, school supplies, and basic necessities—can vary significantly between retailers, both online and in-store. Without a reliable tool to compare prices, consumers often end up overpaying or spending excessive time manually checking multiple platforms. By providing a centralized platform that makes this process simple, the price comparison app directly improves financial accessibility and reduces unnecessary spending.
+
+Another reason we are moving forward with this project is its clear usability and community value. Unlike some of the other ideas, which may face challenges in adoption or require specialized datasets, this app addresses a problem that nearly everyone encounters in their daily lives. The functionality is straightforward—search for an item, receive price comparisons, and choose the best option—but its impact is broad. The tool is designed to empower individuals to make smarter purchasing decisions, saving both money and time.
+
+In terms of technical feasibility, the project is practical to implement using publicly available APIs from major retailers, combined with web scraping techniques for smaller or local stores. The development scope includes features we have the capacity to build, such as user authentication, product search functionality, and result aggregation. We can also expand the app with advanced features like price alerts and favorite item tracking if time allows. This ensures the project will remain challenging enough to showcase our skills, while also being achievable within the semester’s timeline.
+
+Finally, we value this project for its social impact. At a time when cost-of-living concerns continue to rise, our app offers a tangible solution to help people stretch their budgets further. It supports financial literacy, increases access to affordable goods, and reduces the stress of everyday expenses. By aligning technical learning with a real-world problem, we can produce a final project that is not only a demonstration of full stack development skills but also a meaningful contribution to the community.
+
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
 
