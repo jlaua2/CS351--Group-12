@@ -9,7 +9,7 @@ Our weekly meeting will be Thursday 8-9pm.
 
 # Timeline: Weekly Meeting Goals  
 
-**Q2:** What is your goals that your group want to achieve in each weekly meeting?  
+**Q2:** What are your goals that your group want to achieve in each weekly meeting?  
 
 The goal of the weekly meeting is to track where we are in the development cycle and see if we are ahead or behind schedule and adjust accordingly. Also this time would be a place for us to discuss any problems we are running in to.
 
@@ -17,7 +17,7 @@ During week of 9/21: Divide up tasks and discuss which project idea we are going
 
 Prior to 9/28: Meet together weekly to target project weakpoints/bugs and possibly visit office hours to get guidance if the progress feels weak. 
 
-During week of 10/02: Submit Milestone 2 and make sure we are good to go on our plan/schedule
+During week of 10/2: Submit Milestone 2 and make sure we are good to go on our plan/schedule
 
 ---
 
@@ -25,7 +25,7 @@ During week of 10/02: Submit Milestone 2 and make sure we are good to go on our 
 
 **Q3a:** How can your group communicate when doing the Full Stack Group Project?  
 
-We can use discord/Imessage to communicate what we're working on and planning to accomplish throughout the semester.
+We can use Discord/iMessage to communicate what we're working on and planning to accomplish throughout the semester.
 
 **Q3b:** What are the usernames of each group member on that platform?  
 Joel - BlackŁotus
@@ -38,7 +38,7 @@ Anthony - tonerbtw
 
 **Q3c:** What is your group’s expected response time to messages?  
 
-1-2 Hour Response time
+1-2 Hour Response Time
 
 ---
 
@@ -46,12 +46,12 @@ Anthony - tonerbtw
 
 **Q4a:** How will your group handle situations when there is conflict in your group?  
 
-We will reach out as a group to those who are having a dissagreement and find balance with a vote.
+We will first have an open discussion to understand every group member's persepctive. If no agreement is reached, we will vote. If the vote is tied or unresolved, we will involve the professor or a TA as a neutral mediator.
 
 **Q4b:** How will your group handle situations when a member is not contributing enough?  
 
-If a certain team member isn't pulling their weight, the team will give a reminder of their duties and make sure progress is being made that day. If they continue to not do their role in the project we will meet in person to discuss a better way to resolve the issue.
-
+If a member is not contributing, we will check in with them privately and as a group to identify obstacles.
+If issues continue, we will set clear expectations and deadlines. If there is still no improvement, we will meet in person to agree on next steps, which may include redistrubting tasks or involving the professor.
 
 
 ---
@@ -60,7 +60,7 @@ If a certain team member isn't pulling their weight, the team will give a remind
 
 **Q5:** How will your group divide your role in the Group Project?  
 
-Joel - Frontend, Javi - Backend , Michael - Frontend, Anthony - Backend
+Joel - Frontend (UI components, styling, integrating APIs into UI), Javi - Backend (database setup authentication, API endpoints) , Michael - Frontend (search feature, filtering logic, interactive elements), Anthony - Backend (API integration, caching, deployment setup)
 
 
 ---
@@ -72,35 +72,90 @@ Joel - Frontend, Javi - Backend , Michael - Frontend, Anthony - Backend
 Django + React
 
 ---
-# Full Stack Group Project Track - Price Comparison App
+# Full Stack Group Project Track
 ---
 
+# Track 1: Tackling Generative AI Consequences
+
+**Problem 1:**
+
+Generative AI models are frequently trained on massive datasets that scrape creative content from across the internet. Many artists and writers have no way of knowing if their work has been used in these datasets, and when they do suspect misuse, there are very few tools available to document or challenge it. Existing “AI detection” tools are unreliable and prone to false positives, which can harm creators instead of protecting them. This lack of transparency reduces trust in generative AI and strips creators of agency over their own intellectual property.
+
+**Solution 1:**
+
+To address this issue, our group proposes a full stack web application called ArtGuard. The platform allows creators to upload their original works and maintain a portfolio that clearly states usage rights. If creators suspect that their work has been misused in AI-generated content, they can upload the “suspect file” for comparison. The system provides a side-by-side viewer for manual evaluation and opens the case to community discussion, allowing artists to tag, comment, and share experiences. A transparency dashboard will aggregate reports and highlight trends in suspected misuse, offering valuable insights for the broader creative community. Unlike automated detection tools, ArtGuard emphasizes human-driven reporting and discussion, which reduces the risks of false accusations while still empowering creators.
+
+By implementing this solution, the project combines technical skills in full stack development—authentication, databases, file storage, and dashboards—with critical engagement in ethics and policy. The platform promotes accountability, gives creators more control, and fosters an online community where discussions about AI fairness and intellectual property can take place constructively.
+
+---
 
 # Track 2: Technology for Public Goods 
 
 **Problem 2:**
 
-Many Chicago neighborhoods struggle with food insecurity and lack of affordable, nutritious food options. Residents often don’t know where to find nearby food pantries, farmers’ markets, or community kitchens, making it difficult to access healthy meals.
+Food insecurity continues to be a serious issue across many Chicago low income households, particularly in communities that qualify as food deserts. Residents in these areas often lack access to affordable and nutritious food, relying instead on convenience stores or fast food chains that do not provide healthy options. While food pantries, farmers’ markets, and community kitchens do exist, residents frequently struggle to find accurate, up-to-date information about where these resources are located, their operating hours, or the types of food they offer. This lack of visibility creates barriers to accessing healthy meals and prevents communities from making the most of available resources.
 
 **Solution 2:** 
 
-A food resource locator app that maps nearby pantries and markets. Features include real-time pantry hours, dietary filters, and a community board where neighbors can share surplus food. This solution promotes accessibility, reduces food waste, and helps residents find nutritious meals.
+To address this challenge, we propose the development of a food resource locator app designed to connect residents with local food support networks. The app will use geolocation to map nearby food pantries, farmers’ markets, and community kitchens, offering users clear information about operating hours, available services, and eligibility requirements. Additional features will include dietary filters for preferences such as vegetarian, vegan, halal, or gluten-free options, helping residents find resources that align with their needs. A community board will allow neighbors to post and share surplus food, reducing waste while fostering community collaboration. By combining accessibility with real-time, reliable information, this platform directly addresses food insecurity and encourages healthier eating habits in underserved communities.
 
 **Problem 3:** 
 
-Students and community members often face difficulty in finding affordable prices for everyday items across different stores and online retailers. Without a reliable way to compare options, people may overpay or waste time checking multiple platforms.
+Another common challenge faced by both students and community members is the difficulty of finding affordable prices for everyday items, from groceries and school supplies to electronics. Prices can vary widely between local stores and online retailers, and without a centralized way to compare them, consumers often overpay or waste valuable time searching across multiple platforms. This issue disproportionately affects low-income families and students on tight budgets, who must carefully manage their spending but lack efficient tools for cost comparison. The absence of such tools undermines both financial security and equitable access to essential goods.
 
 **Solution 3:**  
 
-A price comparison app that aggregates data from online and in-store retailers. Users can search for a product, and the app will show the lowest available price along with store availability, shipping details, and discounts. This solution saves money, supports informed decision-making, and increases accessibility to affordable goods.
+Our proposed solution is a price comparison app that aggregates product data from both online retailers and local stores. Users will be able to search for a specific item and receive a detailed list of results showing the lowest available prices, store availability, delivery or shipping options, and any applicable discounts or promotions. The app will also allow users to save favorite items and receive alerts when prices drop, ensuring that consumers can make purchases at the most affordable time. By saving money, supporting informed decision-making, and improving access to affordable goods, this platform empowers individuals to stretch their budgets further while reducing the stress of daily expenses.
 
 --- 
+# Track 3: Creative Coding and Cultural Expression
+
+**Idea - Story - Inspiration 4:**
+
+Immigrant Journey
+
+This idea draws from the experiences of first and second generation immigrants in Chicago who often grow up navigating two worlds of heritage culture and contemporary city life. Many students rarely hear the intimate stories behind their neighbors' or classmates' journeys. The project's goal is to use technology to let users step into these personal narratives and understand how cultural identity is carried, changed, and expressed across generations.
+
+**Implementation 4:**
+
+Develop an interactive map-based web platform whwewre users can explore immigrant stories tied to specific neighborhoods and landmarks in Chicago.
+
+Clicking on a location opens a multimedia vignette. It will have audio clips of archival photos, audio clips of oral histories, archival photos, and short narrative texts about families who arrived from different countries.
+
+Include a story-chain feature that allows users to add a memory that links to an existing story, showing the continuinty of cultural presence over time.
+
+The app highlights the cultural context behind foods, languages, and traditions in those areas, making it a living cultural storytelling map rather than just a history record.
+
+**Idea - Story - Inspiration 5:**
+
+Music and sound are powerful carriers of cultural idnetiy. Many immigrant familie keep their heritage alive through songs, instruments, and ambient sounds of home. The project aims to let users experience these auditory "fragments of home" and discover their cultural significance.
+
+**Implementation 5:**
+
+Create an interactive audio visual installation or web experience where users can build and mix layers of sounds that represent different cultures.
+
+Each sound clip comes with a short story card explaining its cultural background and the memories it evokes.
+
+As users mix the sounds, a dynamic visualization evolvers. The colors, patterns, and animated motifs drawn from the associated culture respond to the rhythm and layers chosen.
+
+The final composition can be saved or shared as a "cultural landscape" with the goal of telling a story through sound.
+
+---
 
 # Idea Finalization
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
 
-From the five project ideas we developed, we are going forward with the price comparison app under Technology for Public Goods. We chose this project because affordability and cost-of-living are pressing issues that impact nearly every community. By helping people find the lowest prices, the app directly improves financial accessibility and reduces unnecessary spending. It is also practical to implement with available APIs, has clear usability for the community, and creates a meaningful social impact by making everyday goods more affordable.
+From the five project ideas we developed, our group has decided to move forward with the price comparison app under Technology for Public Goods. After careful consideration, we believe this project not only addresses a widespread and meaningful social problem but is also technically feasible for our team to implement within the scope of the semester.
+
+We chose this project because affordability and cost-of-living are pressing challenges that affect nearly every community, especially students, low-income households, and families trying to manage their budgets. Prices for everyday goods—such as groceries, school supplies, and basic necessities—can vary significantly between retailers, both online and in-store. Without a reliable tool to compare prices, consumers often end up overpaying or spending excessive time manually checking multiple platforms. By providing a centralized platform that makes this process simple, the price comparison app directly improves financial accessibility and reduces unnecessary spending.
+
+Another reason we are moving forward with this project is its clear usability and community value. Unlike some of the other ideas, which may face challenges in adoption or require specialized datasets, this app addresses a problem that nearly everyone encounters in their daily lives. The functionality is straightforward—search for an item, receive price comparisons, and choose the best option—but its impact is broad. The tool is designed to empower individuals to make smarter purchasing decisions, saving both money and time.
+
+In terms of technical feasibility, the project is practical to implement using publicly available APIs from major retailers, combined with web scraping techniques for smaller or local stores. The development scope includes features we have the capacity to build, such as user authentication, product search functionality, and result aggregation. We can also expand the app with advanced features like price alerts and favorite item tracking if time allows. This ensures the project will remain challenging enough to showcase our skills, while also being achievable within the semester’s timeline.
+
+Finally, we value this project for its social impact. At a time when cost-of-living concerns continue to rise, our app offers a tangible solution to help people stretch their budgets further. It supports financial literacy, increases access to affordable goods, and reduces the stress of everyday expenses. By aligning technical learning with a real-world problem, we can produce a final project that is not only a demonstration of full stack development skills but also a meaningful contribution to the community.
+
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
 
@@ -108,11 +163,11 @@ From the five project ideas we developed, we are going forward with the price co
 
 **Q1: What database are you using for your project (SQLite, PostgreSQL, noSQL, MongoDB,...), and why do you choose it?**
 
-We will be usiing SQLite as we are more comfortable using this after taking CS341. Also if we end up using API we may not have to use SQL for all the data.
+We will use SQLite for development since we are familiar with it from CS 341. Our database will store user accounts, cached API results, and product search history. While APIs provide much of the data, the database ensures quick access to frequently used information. For scability, we may later migrate to PostgreSQL.
 
 **Q2: How will database be helpful to your project? How will you design your database to support your application features?**
 
-Databases will be helpful for our project because it will help store all of the data so we can half quick access to it. However if we end up using alot of API's from stores we might not need databases.
+Databases will be helpful for our project because it will help store all of the data so we can half quick access to it. However if we end up using a lot of API's from stores we might not need databases.
 
 ## Third-Party API Integration
 
@@ -181,7 +236,7 @@ Our team can use a web token for authentication. Users will log in with a userna
 
 **Q6: How will you store and protect sensitive user data (e.g., passwords, tokens)?**
 
-Passwords will never be stored in plain text. Instead, I will hash them using a secure algorithm
+Passwords will never be stored in plain text. Instead, we will hash them using a secure algorithm
 
 API keys, and tokens will be stored in environment variables
 
@@ -191,15 +246,15 @@ HTTPS will be secured so tokens and passwords are always encrypted in transit.
 
 **Q7: Where will you deploy your project (e.g., Heroku, AWS, Render)? How will you manage environment variables and secrets during deployment?**
 
-I plan to deploy on Render. Environment variables and secrets will be managed using the platform’s built-in secret manager
+We plan to deploy on Render. Environment variables and secrets will be managed using the platform’s built-in secret manager
 
 **Q8: How will you ensure your deployment is reliable and easy to update?**
 
-we will use CI/CD pipelines (GitHub Actions) to automatically test and deploy changes
+We will use CI/CD pipelines (GitHub Actions) to automatically test and deploy changes
 
 The deployment will be contained using Docker for consistency across environments
 
-we will use logging, and monitoring to detect downtime
+We will use logging, and monitoring to detect downtime
 
 For updates, we’ll implement zero downtime deployments so the app remains available while pushing new versions
 
