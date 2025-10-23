@@ -79,7 +79,13 @@ Django + React
 
 **Problem 1:**
 
+Generative AI models are frequently trained on massive datasets that scrape creative content from across the internet. Many artists and writers have no way of knowing if their work has been used in these datasets, and when they do suspect misuse, there are very few tools available to document or challenge it. Existing “AI detection” tools are unreliable and prone to false positives, which can harm creators instead of protecting them. This lack of transparency reduces trust in generative AI and strips creators of agency over their own intellectual property.
+
 **Solution 1:**
+
+To address this issue, our group proposes a full stack web application called ArtGuard. The platform allows creators to upload their original works and maintain a portfolio that clearly states usage rights. If creators suspect that their work has been misused in AI-generated content, they can upload the “suspect file” for comparison. The system provides a side-by-side viewer for manual evaluation and opens the case to community discussion, allowing artists to tag, comment, and share experiences. A transparency dashboard will aggregate reports and highlight trends in suspected misuse, offering valuable insights for the broader creative community. Unlike automated detection tools, ArtGuard emphasizes human-driven reporting and discussion, which reduces the risks of false accusations while still empowering creators.
+
+By implementing this solution, the project combines technical skills in full stack development—authentication, databases, file storage, and dashboards—with critical engagement in ethics and policy. The platform promotes accountability, gives creators more control, and fosters an online community where discussions about AI fairness and intellectual property can take place constructively.
 
 ---
 
@@ -87,19 +93,19 @@ Django + React
 
 **Problem 2:**
 
-Many Chicago neighborhoods struggle with food insecurity and lack of affordable, nutritious food options. Residents often don’t know where to find nearby food pantries, farmers’ markets, or community kitchens, making it difficult to access healthy meals.
+Food insecurity continues to be a serious issue across many Chicago low income households, particularly in communities that qualify as food deserts. Residents in these areas often lack access to affordable and nutritious food, relying instead on convenience stores or fast food chains that do not provide healthy options. While food pantries, farmers’ markets, and community kitchens do exist, residents frequently struggle to find accurate, up-to-date information about where these resources are located, their operating hours, or the types of food they offer. This lack of visibility creates barriers to accessing healthy meals and prevents communities from making the most of available resources.
 
 **Solution 2:** 
 
-A food resource locator app that maps nearby pantries and markets. Features include real-time pantry hours, dietary filters, and a community board where neighbors can share surplus food. This solution promotes accessibility, reduces food waste, and helps residents find nutritious meals.
+To address this challenge, we propose the development of a food resource locator app designed to connect residents with local food support networks. The app will use geolocation to map nearby food pantries, farmers’ markets, and community kitchens, offering users clear information about operating hours, available services, and eligibility requirements. Additional features will include dietary filters for preferences such as vegetarian, vegan, halal, or gluten-free options, helping residents find resources that align with their needs. A community board will allow neighbors to post and share surplus food, reducing waste while fostering community collaboration. By combining accessibility with real-time, reliable information, this platform directly addresses food insecurity and encourages healthier eating habits in underserved communities.
 
 **Problem 3:** 
 
-Students and community members often face difficulty in finding affordable prices for everyday items across different stores and online retailers. Without a reliable way to compare options, people may overpay or waste time checking multiple platforms.
+Another common challenge faced by both students and community members is the difficulty of finding affordable prices for everyday items, from groceries and school supplies to electronics. Prices can vary widely between local stores and online retailers, and without a centralized way to compare them, consumers often overpay or waste valuable time searching across multiple platforms. This issue disproportionately affects low-income families and students on tight budgets, who must carefully manage their spending but lack efficient tools for cost comparison. The absence of such tools undermines both financial security and equitable access to essential goods.
 
 **Solution 3:**  
 
-A price comparison app that aggregates data from online and in-store retailers. Users can search for a product, and the app will show the lowest available price along with store availability, shipping details, and discounts. This solution saves money, supports informed decision-making, and increases accessibility to affordable goods.
+Our proposed solution is a price comparison app that aggregates product data from both online retailers and local stores. Users will be able to search for a specific item and receive a detailed list of results showing the lowest available prices, store availability, delivery or shipping options, and any applicable discounts or promotions. The app will also allow users to save favorite items and receive alerts when prices drop, ensuring that consumers can make purchases at the most affordable time. By saving money, supporting informed decision-making, and improving access to affordable goods, this platform empowers individuals to stretch their budgets further while reducing the stress of daily expenses.
 
 --- 
 # Track 3: Creative Coding and Cultural Expression
@@ -140,7 +146,16 @@ The final composition can be saved or shared as a "cultural landscape" with the 
 
 **From 5 project ideas you have above, please choose one of the project that you are going with for the rest of the semester. Explain why you are going with that project**
 
-From the five project ideas we developed, we are going forward with the price comparison app under Technology for Public Goods. We chose this project because affordability and cost-of-living are pressing issues that impact nearly every community. By helping people find the lowest prices, the app directly improves financial accessibility and reduces unnecessary spending. It is also practical to implement with available APIs, has clear usability for the community, and creates a meaningful social impact by making everyday goods more affordable.
+From the five project ideas we developed, our group has decided to move forward with the price comparison app under Technology for Public Goods. After careful consideration, we believe this project not only addresses a widespread and meaningful social problem but is also technically feasible for our team to implement within the scope of the semester.
+
+We chose this project because affordability and cost-of-living are pressing challenges that affect nearly every community, especially students, low-income households, and families trying to manage their budgets. Prices for everyday goods—such as groceries, school supplies, and basic necessities—can vary significantly between retailers, both online and in-store. Without a reliable tool to compare prices, consumers often end up overpaying or spending excessive time manually checking multiple platforms. By providing a centralized platform that makes this process simple, the price comparison app directly improves financial accessibility and reduces unnecessary spending.
+
+Another reason we are moving forward with this project is its clear usability and community value. Unlike some of the other ideas, which may face challenges in adoption or require specialized datasets, this app addresses a problem that nearly everyone encounters in their daily lives. The functionality is straightforward—search for an item, receive price comparisons, and choose the best option—but its impact is broad. The tool is designed to empower individuals to make smarter purchasing decisions, saving both money and time.
+
+In terms of technical feasibility, the project is practical to implement using publicly available APIs from major retailers, combined with web scraping techniques for smaller or local stores. The development scope includes features we have the capacity to build, such as user authentication, product search functionality, and result aggregation. We can also expand the app with advanced features like price alerts and favorite item tracking if time allows. This ensures the project will remain challenging enough to showcase our skills, while also being achievable within the semester’s timeline.
+
+Finally, we value this project for its social impact. At a time when cost-of-living concerns continue to rise, our app offers a tangible solution to help people stretch their budgets further. It supports financial literacy, increases access to affordable goods, and reduces the stress of everyday expenses. By aligning technical learning with a real-world problem, we can produce a final project that is not only a demonstration of full stack development skills but also a meaningful contribution to the community.
+
 
 # Extra Credit (Only do this if you are done with Idea Finalization)
 
