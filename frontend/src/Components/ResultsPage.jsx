@@ -1,146 +1,306 @@
-import React, { useState, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { mockProducts } from '../Data/mockProducts'; // Import mock data and we wont need this when the backend is ready
+// src/Components/ResultsPage.jsx
+import React, { useState, useMemo } from "react";
+import { useSearchParams } from "react-router-dom";
+import { mockProducts } from "../Data/mockProducts";
 
-// Component for a single product result card
-const ProductResultCard = ({ product }) => (
-  <div className="result-card" style={{ border: '1px solid #ddd', padding: '15px', margin: '10px', width: '45%' }}>
-    <h4>{product.store}</h4>
-    <p>Price: ${product.price.toFixed(2)}</p>
-    <p>Shipping: ${product.shipping.toFixed(2)}</p>
-    <p>Total Cost: **${(product.price + product.shipping).toFixed(2)}**</p>
-    <a href={product.link} target="_blank" rel="noopener noreferrer">
-      <button>Link Button</button>
-    </a>
-  </div>
-);
+// colors
+const C = {
+  dark: "#2f2f2f",
+  ink: "#111111",
+  white: "#ffffff",
+  mid: "#e3e3e3",
+  border: "#cfcfcf",
+  subtle: "#efefef",
+  black: "#000000",
+};
 
-const ResultsPage = () => {
+const styles = {
+  page: {
+    fontFamily:
+      'system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif',
+    color: C.ink,
+    background: C.white,
+  },
+  main: { display: "flex", gap: 20, padding: 24 },
+  sidebar: {
+    width: 260,
+    borderRight: `1px solid ${C.border}`,
+    paddingRight: 20,
+  },
+  sidebarTitle: { fontSize: 20, fontWeight: 700, margin: "8px 0 18px" },
+  filterRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: 14,
+  },
+  dot: {
+    width: 24,
+    height: 24,
+    borderRadius: 999,
+    background: C.mid,
+    border: `1px solid ${C.border}`,
+  },
+  sq: {
+    width: 24,
+    height: 24,
+    borderRadius: 4,
+    background: C.mid,
+    border: `1px solid ${C.border}`,
+  },
+
+  // Top info row
+  resultsWrap: { flex: 1 },
+  topRow: {
+    display: "grid",
+    gridTemplateColumns: "1fr auto",
+    gap: 20,
+    alignItems: "start",
+  },
+  titleLine: { display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" },
+  title: { fontSize: 22, fontWeight: 800 },
+  refineBtn: {
+    background: C.mid,
+    border: `1px solid ${C.border}`,
+    borderRadius: 6,
+    padding: "8px 12px",
+    cursor: "pointer",
+  },
+  productPic: {
+    width: 360,
+    height: 180,
+    background: C.mid,
+    border: `1px solid ${C.border}`,
+    borderRadius: 6,
+    display: "grid",
+    placeItems: "center",
+    fontWeight: 600,
+    color: "#333",
+  },
+
+  // Sort row
+  sortRow: { marginTop: 18, display: "flex", alignItems: "center", gap: 26 },
+  sortLabel: { fontWeight: 700, fontSize: 18 },
+  radioWrap: { display: "flex", alignItems: "center", gap: 10 },
+  radioDot: (checked) => ({
+    width: 22,
+    height: 22,
+    borderRadius: 999,
+    border: `2px solid ${C.black}`,
+    background: checked ? C.black : C.white,
+  }),
+  radioText: { fontSize: 16 },
+
+  divider: { marginTop: 18, height: 1, background: C.border },
+
+  // Results header
+  resHeader: {
+    textAlign: "center",
+    fontWeight: 800,
+    margin: "22px 0",
+  },
+
+  // Grid
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))",
+    gap: 24,
+    alignItems: "stretch",
+  },
+
+  // Card
+  card: {
+    background: C.mid,
+    border: `1px solid ${C.border}`,
+    borderRadius: 6,
+    padding: 18,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    minHeight: 140,
+  },
+  cardTitle: { fontSize: 18, fontWeight: 800, margin: 0, color: C.ink },
+  priceRow: { marginTop: 8, color: "#222" },
+  totalStrong: { fontWeight: 800 },
+  linkBar: {
+    marginTop: 12,
+    display: "flex",
+    justifyContent: "flex-end",
+  },
+  linkBtn: {
+    background: C.black,
+    color: C.white,
+    border: 0,
+    padding: "10px 14px",
+    borderRadius: 4,
+    cursor: "pointer",
+  },
+};
+
+// Single product card
+const ProductResultCard = ({ product }) => {
+  const total = product.price + product.shipping;
+  return (
+    <div className="result-card" style={styles.card}>
+      <div>
+        <h4 style={styles.cardTitle}>{product.store}</h4>
+        <div style={styles.priceRow}>Price: ${product.price.toFixed(2)}</div>
+        <div style={styles.priceRow}>Shipping: ${product.shipping.toFixed(2)}</div>
+        <div style={styles.priceRow}>
+          Total Cost: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
+        </div>
+      </div>
+      <div style={styles.linkBar}>
+        <a href={product.link} target="_blank" rel="noopener noreferrer">
+          <button style={styles.linkBtn}>Link Button</button>
+        </a>
+      </div>
+    </div>
+  );
+};
+
+export default function ResultsPage() {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('q') || 'Product';
-  
-  // State for sorting and filtering
-  const [sortBy, setSortBy] = useState('total_cost_asc'); // Default sort
+  const query = searchParams.get("q") || "Product";
+
+  // sorting and filtering state
+  const [sortBy, setSortBy] = useState("total_cost_asc");
   const [filterLowest, setFilterLowest] = useState(false);
   const [filterInStore, setFilterInStore] = useState(false);
   const [filterOnline, setFilterOnline] = useState(false);
 
-  // --- Filtering Logic ---
+  // Filtering
   const filteredProducts = useMemo(() => {
-    let results = mockProducts; // Use the mock data for the prototype
-    
-    // NOTE: For a real app, you would fetch data here and store it in state
-    
-    // Apply filters
-    if (filterInStore) {
-      results = results.filter(p => p.inStore);
-    }
-    if (filterOnline) {
-      results = results.filter(p => p.online);
-    }
-    
-    // 'Lowest' filter is usually applied *after* other filters
+    let results = mockProducts;
+
+    if (filterInStore) results = results.filter((p) => p.inStore);
+    if (filterOnline) results = results.filter((p) => p.online);
+
     if (filterLowest) {
-        // Find the minimum total cost
-        const minCost = results.reduce((min, p) => 
-            Math.min(min, p.price + p.shipping), Infinity);
-        
-        // Filter to only include items at that minimum total cost
-        results = results.filter(p => (p.price + p.shipping) === minCost);
+      const minCost = results.reduce(
+        (min, p) => Math.min(min, p.price + p.shipping),
+        Infinity
+      );
+      results = results.filter((p) => p.price + p.shipping === minCost);
     }
 
     return results;
   }, [filterLowest, filterInStore, filterOnline]);
 
-  // --- Sorting Logic ---
+  // Sorting
   const sortedAndFilteredProducts = useMemo(() => {
-    // Create a mutable copy to sort
-    const sorted = [...filteredProducts]; 
-    
+    const sorted = [...filteredProducts];
     sorted.sort((a, b) => {
-      const totalA = a.price + a.shipping;
-      const totalB = b.price + b.shipping;
-      
-      if (sortBy === 'total_cost_asc') {
-        return totalA - totalB; // Sort by Total Cost - Shipping (Ascending)
-      } else if (sortBy === 'total_cost_desc') {
-        return totalB - totalA; // Sort by Total Cost + Shipping (Descending) - Though wireframe only shows asc/desc of *Total Cost*
-      }
-      return 0;
+      const ta = a.price + a.shipping;
+      const tb = b.price + b.shipping;
+      return sortBy === "total_cost_desc" ? tb - ta : ta - tb;
     });
-
     return sorted;
   }, [filteredProducts, sortBy]);
 
-
-  // Helper function to handle radio button behavior for sorting
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
-  }
+  const handleSortChange = (value) => setSortBy(value);
 
   return (
-    <div className="results-page">
-      {/* <Header /> */}
-      <main className="content-area" style={{ display: 'flex', gap: '20px', padding: '20px' }}>
-        
-        <aside className="filter-sidebar" style={{ width: '250px', borderRight: '1px solid #ccc', paddingRight: '20px' }}>
-          <h3>Filter By</h3>
-          {/* NOTE: Checkbox logic for multiple filters active */}
-          <label>
-            <input type="checkbox" checked={filterLowest} onChange={() => setFilterLowest(!filterLowest)} />
-            Lowest Price Only
-          </label><br />
-          <label>
-            <input type="checkbox" checked={filterInStore} onChange={() => setFilterInStore(!filterInStore)} />
-            In Store Only
-          </label><br />
-          <label>
-            <input type="checkbox" checked={filterOnline} onChange={() => setFilterOnline(!filterOnline)} />
-            Online Only
+    <div className="results-page" style={styles.page}>
+      <main className="content-area" style={styles.main}>
+        {/* Sidebar filters */}
+        <aside className="filter-sidebar" style={styles.sidebar}>
+          <div style={styles.sidebarTitle}>Filter By:</div>
+
+          <label style={styles.filterRow}>
+            <span style={styles.dot} />
+            <input
+              type="checkbox"
+              checked={filterLowest}
+              onChange={() => setFilterLowest(!filterLowest)}
+              style={{ display: "none" }}
+            />
+            <span>Lowest</span>
+          </label>
+
+          <label style={styles.filterRow}>
+            <span style={styles.sq} />
+            <input
+              type="checkbox"
+              checked={filterInStore}
+              onChange={() => setFilterInStore(!filterInStore)}
+              style={{ display: "none" }}
+            />
+            <span>In Store Only</span>
+          </label>
+
+          <label style={styles.filterRow}>
+            <span style={styles.sq} />
+            <input
+              type="checkbox"
+              checked={filterOnline}
+              onChange={() => setFilterOnline(!filterOnline)}
+              style={{ display: "none" }}
+            />
+            <span>Online Only</span>
           </label>
         </aside>
 
-        <section className="results-section" style={{ flexGrow: 1 }}>
-          <div className="search-info" style={{ marginBottom: '20px' }}>
-            <h2>Result For: **{query}**</h2>
-            <button style={{ padding: '5px 10px' }}>Refine Search Button</button>
+        {/* Main results column */}
+        <section className="results-section" style={styles.resultsWrap}>
+          {/* Top info row */}
+          <div style={styles.topRow}>
+            <div>
+              <div style={styles.titleLine}>
+                <h2 style={styles.title}>Result For: {query}</h2>
+                <button style={styles.refineBtn}>Refine Search Button</button>
+              </div>
+
+              {/* Sort row */}
+              <div style={styles.sortRow}>
+                <span style={styles.sortLabel}>Sort By:</span>
+
+                <label style={styles.radioWrap}>
+                  <span style={styles.radioDot(sortBy === "total_cost_asc")} />
+                  <input
+                    type="radio"
+                    name="sort"
+                    value="total_cost_asc"
+                    checked={sortBy === "total_cost_asc"}
+                    onChange={() => handleSortChange("total_cost_asc")}
+                    style={{ display: "none" }}
+                  />
+                  <span style={styles.radioText}>Total Cost - Shipping</span>
+                </label>
+
+                <label style={styles.radioWrap}>
+                  <span style={styles.radioDot(sortBy === "total_cost_desc")} />
+                  <input
+                    type="radio"
+                    name="sort"
+                    value="total_cost_desc"
+                    checked={sortBy === "total_cost_desc"}
+                    onChange={() => handleSortChange("total_cost_desc")}
+                    style={{ display: "none" }}
+                  />
+                  <span style={styles.radioText}>Total Cost + Shipping</span>
+                </label>
+              </div>
+            </div>
+
+            <div style={styles.productPic}>Product Picture</div>
           </div>
 
-          <div className="sort-controls" style={{ marginBottom: '20px' }}>
-            <strong>Sort By:</strong>
-            <label style={{ marginLeft: '15px' }}>
-              <input 
-                type="radio" 
-                value="total_cost_asc" 
-                checked={sortBy === 'total_cost_asc'} 
-                onChange={handleSortChange} 
-              />
-              Total Cost + Shipping (Lowest First)
-            </label>
-            <label style={{ marginLeft: '15px' }}>
-              <input 
-                type="radio" 
-                value="total_cost_desc" 
-                checked={sortBy === 'total_cost_desc'} 
-                onChange={handleSortChange} 
-              />
-              Total Cost + Shipping (Highest First)
-            </label>
-          </div>
-          
-          <h3>Results Found ({sortedAndFilteredProducts.length})</h3>
-          
-          <div className="results-list" style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {sortedAndFilteredProducts.map((product) => (
-              <ProductResultCard key={product.id} product={product} />
+          <div style={styles.divider} />
+
+          {/* Results header */}
+          <h3 style={styles.resHeader}>
+            Results Found (Updated 5 minutes ago)
+          </h3>
+
+          {/* Grid of results */}
+          <div className="results-list" style={styles.grid}>
+            {sortedAndFilteredProducts.map((p) => (
+              <ProductResultCard key={p.id} product={p} />
             ))}
           </div>
-          
         </section>
       </main>
-      {/* <Footer /> */}
     </div>
   );
-};
-
-export default ResultsPage;
+}
