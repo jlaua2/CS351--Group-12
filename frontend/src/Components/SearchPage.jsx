@@ -143,17 +143,6 @@ const page = {
 
   return (
     <div style={page}>
-      {/* Top dark bar */}
-      <div style={bar}>
-        <div style={brandWrap}>
-          <div style={logo}>Logo</div>
-          <span style={brandPill}>PriceWise</span>
-        </div>
-        <div style={{ display: "flex", gap: 12 }}>
-          <button style={pillBtn}>Login/Signup</button>
-          <button style={pillBtn}>Favorite</button>
-        </div>
-      </div>
 
       {/* Main content */}
       <main style={container}>
@@ -188,11 +177,7 @@ const page = {
         </p>
       </main>
 
-      {/* Bottom dark bar */}
-      <div style={bar}>
-        <button style={pillBtn}>About</button>
-        <button style={pillBtn}>Privacy</button>
-      </div>
+    
     </div>
   );
 }
