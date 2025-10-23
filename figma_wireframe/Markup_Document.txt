@@ -1,0 +1,79 @@
+PriceWise: Price Comparison App - Wireframe Documentation
+
+Project Goal: To empower consumers (especially students and low-income households) to save money and time by providing a single, reliable platform to instantly compare prices for everyday items across major online retailers and local stores.
+
+Project Description and Goals
+
+PriceWise is a tool designed under the "Technology for Public Goods" theme. Our primary goal is to address the pressing challenge of the rising cost of living by increasing financial accessibility. The app allows users to search for a product and receive an aggregated, ranked list of prices, including total cost (item price + shipping).
+
+Key Goals for Milestone 3:
+
+Establish a clear, user-friendly flow from search to results.
+
+Define filtering and sorting controls necessary for effective comparison.
+
+Create a structure that clearly communicates the source, price, and total cost of a product.
+
+Figma Wireframe Details
+
+Search Screen
+
+The entry point, designed for speed and simplicity. The main call-to-action is the large, central search bar.
+
+Results Screen
+
+Displays the aggregated price data, prioritizing comparison via filtering and sorting controls.
+
+Link: https://www.figma.com/design/R8nkFdF02KqFsG0fzFWYp9/MVP-Group-12?node-id=7-30&t=9tu23pIbnw2cjiib-1 
+
+Layout, Flows, and Design Patterns
+
+1. Simple, High-Contrast Layout
+
+Pattern Chosen: Minimalist, two-scene flow (Search -> Results).
+
+Reasoning: Price comparison is a utility task. The layout avoids distractions, allowing the user to focus immediately on the search function on the homepage and the results data on the next screen. This improves efficiency and reduces cognitive load.
+
+User Benefit: Users can quickly find the information they need without navigating complex menus, saving time.
+
+2. Prominent Filtering and Sorting
+
+Pattern Chosen: A dedicated Filter Sidebar and Sort By radio buttons on the Results Screen.
+
+Reasoning: For price comparison, raw data isn't enough; context matters. Users need to sort by Total Cost + Shipping and filter by local availability (In Store Only / Online Only) to make actionable decisions.
+
+User Benefit: The user can instantly customize the results to their personal budget and shopping needs (e.g., filtering out online-only results if they need an item today).
+
+3. Total Cost Focus
+
+Pattern Chosen: Explicitly displaying and sorting by "Total Cost + Shipping."
+
+Reasoning: Hiding shipping costs is a common anti-pattern that leads to buyer frustration. By normalizing the "Total Cost," we offer genuine comparison integrity.
+
+User Benefit: Prevents users from overpaying due to hidden fees and ensures the lowest listed result truly is the most affordable option.
+
+Assumptions, Limitations, and Open Questions (Frontend)
+
+Assumptions
+
+We assume the backend will return a unified data structure with price, shipping, and inStore/online boolean flags for every result, allowing our local frontend filters to function effectively.
+
+We assume the user will primarily search using simple product names (e.g., "coffee maker") rather than complex SKUs.
+
+Limitations for Prototype
+
+Aesthetics: The current wireframe is low-fidelity; final UI/UX design and proper responsive styling will be a focus for Milestone 4.
+
+Interactions: The "Login/Signup" and "Favorite" buttons are placeholders and do not yet link to functional user account features.
+
+Open Questions
+
+Autocomplete Integration: How should the Trie autocomplete results be visually displayed in the Search Bar? As a simple dropdown list or a more integrated suggestion box?
+
+Price Change Notifications: Should the results screen visually highlight the price difference if the data is slightly older (e.g., if the timestamp shows "Updated 5 minutes ago")?
+
+Future Improvements (Post-Milestone 3)
+
+Advanced Filtering: Adding filters for store-specific availability, rating/reviews, and price range sliders.
+
+User Accounts and Favorites: Implementing the Favorite and Login/Signup functionality to allow users to save items and receive price drop alerts (leveraging the database design).
