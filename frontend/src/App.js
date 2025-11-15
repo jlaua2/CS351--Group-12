@@ -29,9 +29,18 @@
 // }
 // src/App.js
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import SearchPage from "./Components/SearchPage.jsx";
 import ResultsPage from "./Components/ResultsPage.jsx";
+import PrivacyPage from "./Components/PrivacyPage.jsx";
+import AboutPage from "./Components/AboutPage.jsx";
+import FavoritePage from "./Components/FavoritePage.jsx";
 
 export default function App() {
   // Figma-style colors and tokens
@@ -77,6 +86,46 @@ export default function App() {
     cursor: "pointer",
   };
 
+  // A smaller component to handle the header logic
+  const AppHeader = () => {
+    const location = useLocation();
+    const isOnFavoritePage = location.pathname === "/favorite";
+
+    return (
+      <header style={bar}>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <div style={brandWrap}>
+            <div style={logo}>Logo</div>
+            <span style={brandPill}>PriceWise</span>
+          </div>
+        </Link>
+        <div style={{ display: "flex", gap: 12 }}>
+          {!isOnFavoritePage && <Link to="/favorite"><button style={pillBtn}>Favorite</button></Link>}
+        </div>
+      </header>
+    );
+  };
+
+  // A smaller component to handle the footer logic
+  const AppFooter = () => {
+    const location = useLocation();
+    const isOnAboutPage = location.pathname === "/about";
+    const isOnPrivacyPage = location.pathname === "/privacy";
+
+    return (
+      <footer style={bar}>
+        {/* About link on the left, or a placeholder to maintain spacing */}
+        {!isOnAboutPage ? (
+          <Link to="/about"><button style={pillBtn}>About</button></Link>
+        ) : <div />}
+        {/* Privacy link on the right */}
+        {!isOnPrivacyPage && (
+          <Link to="/privacy"><button style={pillBtn}>Privacy</button></Link>
+        )}
+      </footer>
+    );
+  };
+
   return (
     <Router>
       <div
@@ -90,35 +139,22 @@ export default function App() {
         }}
       >
         {/* Top bar styled like Figma */}
-        <header style={bar}>
-          <div style={brandWrap}>
-            <div style={logo}>Logo</div>
-            <span style={brandPill}>PriceWise</span>
-          </div>
-          <div style={{ display: "flex", gap: 12 }}>
-            <button style={pillBtn}>Login/Signup</button>
-            <button style={pillBtn}>Favorite</button>
-          </div>
-        </header>
+        <AppHeader />
 
         {/* Main route content */}
         <div style={{ flex: 1 }}>
           <Routes>
             <Route path="/" element={<SearchPage />} />
             <Route path="/results" element={<ResultsPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/favorite" element={<FavoritePage />} />
           </Routes>
         </div>
 
         {/* Footer styled like Figma */}
-        <footer style={bar}>
-          <button style={pillBtn}>About</button>
-          <button style={pillBtn}>Privacy</button>
-        </footer>
+        <AppFooter />
       </div>
     </Router>
   );
 }
-
-
-
-

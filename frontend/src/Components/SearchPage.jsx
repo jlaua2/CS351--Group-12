@@ -29,42 +29,6 @@ const page = {
     flexDirection: "column",
   };
 
-  const bar = {
-    background: color.dark,
-    color: "#fff",
-    padding: "12px 24px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  };
-
-  const brandWrap = { display: "flex", alignItems: "center", gap: 10 };
-  const logo = {
-    width: 36,
-    height: 36,
-    borderRadius: 999,
-    background: "#555",
-    color: "#fff",
-    fontSize: 12,
-    display: "grid",
-    placeItems: "center",
-  };
-  const brandPill = {
-    background: "rgba(255,255,255,0.15)",
-    color: "#fff",
-    borderRadius: 6,
-    padding: "4px 8px",
-    fontSize: 14,
-  };
-  const pillBtn = {
-    background: "rgba(255,255,255,0.2)",
-    color: "#fff",
-    border: 0,
-    padding: "6px 10px",
-    borderRadius: 6,
-    cursor: "pointer",
-  };
-
   const container = {
     width: "100%",
     maxWidth: 1080,
