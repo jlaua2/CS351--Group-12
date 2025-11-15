@@ -34,6 +34,6 @@ if __name__ == "__main__":
     trie.insert("Samsung Galaxy S24", "Target", 899.99)
     trie.insert("Samsung Galaxy S24", "Walmart", 879.99)
 
-    print(trie.search("iPhone 17 Pro"))
+    print(trie.search("iPhone 15 Pro"))
     print(trie.search("Samsung Galaxy S24"))
     print(trie.search("Pixel 9 Pro"))
