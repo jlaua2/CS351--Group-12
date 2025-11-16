@@ -28,7 +28,7 @@
 //   );
 // }
 // src/App.js
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -86,19 +86,41 @@ export default function App() {
     cursor: "pointer",
   };
 
+  // Custom hook to get the previous location
+  const usePreviousLocation = () => {
+    const location = useLocation();
+    const prevLocationRef = useRef(location);
+
+    useEffect(() => {
+      prevLocationRef.current = location;
+    }, [location]);
+
+    return prevLocationRef.current;
+  };
+
   // A smaller component to handle the header logic
   const AppHeader = () => {
     const location = useLocation();
+    const prevLocation = usePreviousLocation();
     const isOnFavoritePage = location.pathname === "/favorite";
+    const isOnAboutPage = location.pathname === "/about";
+    const isOnPrivacyPage = location.pathname === "/privacy";
 
+    // Check if we are on one of the secondary pages
+    const onSecondaryPage = isOnFavoritePage || isOnAboutPage || isOnPrivacyPage;
+    const cameFromResults = prevLocation && prevLocation.pathname.startsWith("/results");
+
+    const showBackToResults = onSecondaryPage && cameFromResults;
     return (
       <header style={bar}>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <div style={brandWrap}>
-            <div style={logo}>Logo</div>
-            <span style={brandPill}>PriceWise</span>
-          </div>
+          <button style={pillBtn}>PriceWise</button>
         </Link>
+        {showBackToResults && (
+          <Link to={-1} style={{ textDecoration: "none" }}>
+            <button style={pillBtn}>Back to Results</button>
+          </Link>
+        )}
         <div style={{ display: "flex", gap: 12 }}>
           {!isOnFavoritePage && <Link to="/favorite"><button style={pillBtn}>Favorite</button></Link>}
         </div>

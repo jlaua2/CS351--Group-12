@@ -154,7 +154,7 @@ const ProductResultCard = ({ product }) => {
       </div>
       <div style={styles.linkBar}>
         <a href={product.link} target="_blank" rel="noopener noreferrer">
-          <button style={styles.linkBtn}>Link Button</button>
+          <button style={styles.linkBtn}>GO TO SITE</button>
         </a>
       </div>
     </div>
