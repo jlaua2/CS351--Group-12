@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // Assuming you have Header and Footer components
 // import Header from './Header';
 // import Footer from './Footer';
@@ -7,7 +7,12 @@ import { useNavigate } from 'react-router-dom';
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [isMounted, setIsMounted] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
 // figma design colors
 const color = {
@@ -37,12 +42,14 @@ const page = {
     flex: 1,
   };
 
-  const hero = {
+  const hero = (mounted) => ({
     fontWeight: 800,
     lineHeight: 1.06,
     fontSize: 48,
     margin: "0 0 28px 0",
-  };
+    opacity: mounted ? 1 : 0,
+    transition: "opacity 1s ease-in-out",
+  });
 
   const searchRow = {
     // The gray strip in the wireframe
@@ -110,7 +117,7 @@ const page = {
 
       {/* Main content */}
       <main style={container}>
-        <h1 style={hero}>
+        <h1 style={hero(isMounted)}>
           Compare Prices.
           <br />
           Save More.
