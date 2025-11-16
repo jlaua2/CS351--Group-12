@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 const SearchPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
 // figma design colors
