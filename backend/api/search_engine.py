@@ -3,6 +3,7 @@ from .data_structures.pricematchtrie import PriceMatchTrie
 price_trie = PriceMatchTrie()
 
 # Insert demo products
+# TODO: Replace these with scraped or API data later
 price_trie.insert(
     "iphone 15",
     "Walmart",
