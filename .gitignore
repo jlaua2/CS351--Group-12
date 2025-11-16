@@ -1,0 +1,17 @@
+.venv
+# Python / Django backend
+backend/db.sqlite3
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+
+# Node frontend
+frontend/node_modules/
+**/node_modules/
+npm-debug.log*
+
+# Python cache
+**/*.pyc
+
+# VSCode
+.vscode/
