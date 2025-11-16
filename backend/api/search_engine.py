@@ -3,7 +3,7 @@ from .data_structures import PriceMatchTrie
 price_trie = PriceMatchTrie()
 
 # TODO: Replace these with scraped or API data later
-# place holder products
+# place holder product
 price_trie.insert(
     "iPhone 17 Pro", "Amazon",
     price=949.99, shipping=0.0,
