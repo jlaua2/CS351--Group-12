@@ -36,20 +36,22 @@ const styles = {
     gap: 12,
     marginBottom: 14,
   },
-  dot: {
+  dot: (checked) => ({
     width: 24,
     height: 24,
     borderRadius: 999,
-    background: C.mid,
+    background: checked ? C.black : C.mid,
     border: `1px solid ${C.border}`,
-  },
-  sq: {
+    cursor: "pointer",
+  }),
+  sq: (checked) => ({
     width: 24,
     height: 24,
     borderRadius: 4,
-    background: C.mid,
+    background: checked ? C.black : C.mid,
     border: `1px solid ${C.border}`,
-  },
+    cursor: "pointer",
+  }),
 
   resultsWrap: { flex: 1 },
   topRow: {
@@ -149,7 +151,7 @@ const ProductResultCard = ({ product }) => {
       </div>
       <div style={styles.linkBar}>
         <a href={product.link} target="_blank" rel="noopener noreferrer">
-          <button style={styles.linkBtn}>Link Button</button>
+          <button style={styles.linkBtn}>GO TO SITE</button>
         </a>
       </div>
     </div>
@@ -221,7 +223,7 @@ export default function ResultsPage() {
           <div style={styles.sidebarTitle}>Filter By:</div>
 
           <label style={styles.filterRow}>
-            <span style={styles.dot} />
+            <span style={styles.dot(filterLowest)} />
             <input
               type="checkbox"
               checked={filterLowest}
@@ -232,7 +234,7 @@ export default function ResultsPage() {
           </label>
 
           <label style={styles.filterRow}>
-            <span style={styles.sq} />
+            <span style={styles.sq(filterInStore)} />
             <input
               type="checkbox"
               checked={filterInStore}
@@ -243,7 +245,7 @@ export default function ResultsPage() {
           </label>
 
           <label style={styles.filterRow}>
-            <span style={styles.sq} />
+            <span style={styles.sq(filterOnline)} />
             <input
               type="checkbox"
               checked={filterOnline}

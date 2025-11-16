@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // Assuming you have Header and Footer components
 // import Header from './Header';
 // import Footer from './Footer';
@@ -6,8 +6,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 
 const SearchPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isMounted, setIsMounted] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
 // figma design colors
 const color = {
@@ -29,42 +34,6 @@ const page = {
     flexDirection: "column",
   };
 
-  const bar = {
-    background: color.dark,
-    color: "#fff",
-    padding: "12px 24px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  };
-
-  const brandWrap = { display: "flex", alignItems: "center", gap: 10 };
-  const logo = {
-    width: 36,
-    height: 36,
-    borderRadius: 999,
-    background: "#555",
-    color: "#fff",
-    fontSize: 12,
-    display: "grid",
-    placeItems: "center",
-  };
-  const brandPill = {
-    background: "rgba(255,255,255,0.15)",
-    color: "#fff",
-    borderRadius: 6,
-    padding: "4px 8px",
-    fontSize: 14,
-  };
-  const pillBtn = {
-    background: "rgba(255,255,255,0.2)",
-    color: "#fff",
-    border: 0,
-    padding: "6px 10px",
-    borderRadius: 6,
-    cursor: "pointer",
-  };
-
   const container = {
     width: "100%",
     maxWidth: 1080,
@@ -73,12 +42,14 @@ const page = {
     flex: 1,
   };
 
-  const hero = {
+  const hero = (mounted) => ({
     fontWeight: 800,
     lineHeight: 1.06,
     fontSize: 48,
     margin: "0 0 28px 0",
-  };
+    opacity: mounted ? 1 : 0,
+    transition: "opacity 1s ease-in-out",
+  });
 
   const searchRow = {
     // The gray strip in the wireframe
@@ -146,7 +117,7 @@ const page = {
 
       {/* Main content */}
       <main style={container}>
-        <h1 style={hero}>
+        <h1 style={hero(isMounted)}>
           Compare Prices.
           <br />
           Save More.
