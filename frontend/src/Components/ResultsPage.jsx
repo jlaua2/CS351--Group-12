@@ -1,8 +1,9 @@
 // src/Components/ResultsPage.jsx
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import { ImageIcon, Store } from "lucide-react"; // Using an icon for the placeholder
-import { mockProducts } from "../Data/mockProducts";
+import { ImageIcon, Store } from "lucide-react";
+
+// REMOVED mockProducts import, as it's no longer needed.
 
 // colors
 const C = {
@@ -12,7 +13,6 @@ const C = {
   mid: "#e3e3e3",
   border: "#cfcfcf",
   subtle: "#efefef",
-  white: "#ffffff",
   black: "#000000",
 };
 
@@ -58,7 +58,6 @@ const styles = {
     cursor: "pointer",
   }),
 
-  // Top info row
   resultsWrap: { flex: 1 },
   topRow: {
     display: "grid",
@@ -94,7 +93,6 @@ const styles = {
     color: C.border,
   },
 
-  // Sort row
   sortRow: { marginTop: 18, display: "flex", alignItems: "center", gap: 26 },
   sortLabel: { fontWeight: 700, fontSize: 18 },
   radioWrap: (hovered) => ({
@@ -118,14 +116,12 @@ const styles = {
 
   divider: { marginTop: 18, height: 1, background: C.border },
 
-  // Results header
   resHeader: {
     textAlign: "center",
     fontWeight: 800,
     margin: "22px 0",
   },
 
-  // Grid
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))",
@@ -133,7 +129,6 @@ const styles = {
     alignItems: "stretch",
   },
 
-  // Card
   card: (hovered) => ({
     background: C.white,
     border: `1px solid ${C.border}`,
@@ -194,7 +189,7 @@ const styles = {
   }),
 };
 
-// Single product card
+// Product Card
 const ProductResultCard = ({ product }) => {
   const total = product.price + product.shipping;
   const [isCardHovered, setIsCardHovered] = useState(false);
@@ -246,37 +241,54 @@ export default function ResultsPage() {
   // Hover state for Refine Search button
   const [isRefineHovered, setIsRefineHovered] = useState(false);
 
+  // State for backend data
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   // sorting and filtering state
   const [sortBy, setSortBy] = useState("total_cost_asc");
   const [filterLowest, setFilterLowest] = useState(false);
   const [filterInStore, setFilterInStore] = useState(false);
   const [filterOnline, setFilterOnline] = useState(false);
 
-  // Filtering
-  const filteredProducts = useMemo(() => {
-    let results = mockProducts;
-
-    if (filterInStore) results = results.filter((p) => p.inStore);
-    if (filterOnline) results = results.filter((p) => p.online);
-
-    if (filterLowest) {
-      const minCost = results.reduce(
-        (min, p) => Math.min(min, p.price + p.shipping),
-        Infinity
-      );
-      results = results.filter((p) => p.price + p.shipping === minCost);
+  // Fetch data from backend API
+  useEffect(() => {
+    async function fetchResults() {
+      try {
+        setLoading(true);
+        const res = await fetch(`/api/search/?q=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        setProducts(data.results || []);
+      } finally {
+        setLoading(false);
+      }
     }
 
-    return results;
-  }, [filterLowest, filterInStore, filterOnline]);
+    fetchResults();
+  }, [query]);
+
+  // Filtering
+  const filteredProducts = useMemo(() => {
+    let list = [...products];
+
+    if (filterInStore) list = list.filter((p) => p.inStore);
+    if (filterOnline) list = list.filter((p) => p.online);
+
+    if (filterLowest && list.length > 0) {
+      const minCost = Math.min(...list.map((p) => p.price + p.shipping));
+      list = list.filter((p) => p.price + p.shipping === minCost);
+    }
+
+    return list;
+  }, [products, filterInStore, filterOnline, filterLowest]);
 
   // Sorting
   const sortedAndFilteredProducts = useMemo(() => {
     const sorted = [...filteredProducts];
     sorted.sort((a, b) => {
-      const ta = a.price + a.shipping;
-      const tb = b.price + b.shipping;
-      return sortBy === "total_cost_desc" ? tb - ta : ta - tb;
+      const A = a.price + a.shipping;
+      const B = b.price + b.shipping;
+      return sortBy === "total_cost_desc" ? B - A : A - B;
     });
     return sorted;
   }, [filteredProducts, sortBy]);
@@ -286,7 +298,6 @@ export default function ResultsPage() {
   const handleInStoreFilterChange = () => {
     const newInStoreState = !filterInStore;
     setFilterInStore(newInStoreState);
-    // If "In Store" is being turned on, turn "Online" off.
     if (newInStoreState) {
       setFilterOnline(false);
     }
@@ -295,7 +306,6 @@ export default function ResultsPage() {
   const handleOnlineFilterChange = () => {
     const newOnlineState = !filterOnline;
     setFilterOnline(newOnlineState);
-    // If "Online" is being turned on, turn "In Store" off.
     if (newOnlineState) {
       setFilterInStore(false);
     }
@@ -304,7 +314,6 @@ export default function ResultsPage() {
   return (
     <div className="results-page" style={styles.page}>
       <main className="content-area" style={styles.main}>
-        {/* Sidebar filters */}
         <aside className="filter-sidebar" style={styles.sidebar}>
           <div style={styles.sidebarTitle}>Filter By:</div>
 
@@ -354,9 +363,7 @@ export default function ResultsPage() {
           </label>
         </aside>
 
-        {/* Main results column */}
         <section className="results-section" style={styles.resultsWrap}>
-          {/* Top info row */}
           <div style={styles.topRow}>
             <div>
               <div style={styles.titleLine}>
@@ -370,7 +377,6 @@ export default function ResultsPage() {
                 </Link>
               </div>
 
-              {/* Sort row */}
               <div style={styles.sortRow}>
                 <span style={styles.sortLabel}>Sort By:</span>
 
@@ -417,12 +423,12 @@ export default function ResultsPage() {
 
           <div style={styles.divider} />
 
-          {/* Results header */}
           <h3 style={styles.resHeader}>
-            Results Found (Updated 5 minutes ago)
+            {loading
+              ? "Loading..."
+              : `Results Found (${sortedAndFilteredProducts.length})`}
           </h3>
 
-          {/* Grid of results */}
           <div className="results-list" style={styles.grid}>
             {sortedAndFilteredProducts.map((p) => (
               <ProductResultCard key={p.id} product={p} />
