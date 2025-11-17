@@ -28,7 +28,7 @@
 //   );
 // }
 // src/App.js
-import React, { useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -77,14 +77,21 @@ export default function App() {
     padding: "4px 8px",
     fontSize: 14,
   };
-  const pillBtn = {
-    background: color.light,
-    color: "#fff",
+  const pillBtn = (hovered) => ({
+    background: "linear-gradient(90deg, #ff8a00, #e52e71)",
+    color: color.white,
     border: 0,
-    padding: "6px 10px",
+    padding: "8px 12px",
     borderRadius: 6,
+    fontWeight: 600,
     cursor: "pointer",
-  };
+    transition: "all 0.3s ease-in-out",
+    boxShadow: hovered
+      ? "0 4px 15px rgba(255, 80, 120, 0.4)"
+      : "0 2px 8px rgba(0,0,0,0.1)",
+    transform: hovered ? "translateY(-2px)" : "translateY(0)",
+    textDecoration: "none",
+  });
 
   // Custom hook to get the previous location
   const usePreviousLocation = () => {
@@ -98,31 +105,59 @@ export default function App() {
     return prevLocationRef.current;
   };
 
-  // A smaller component to handle the header logic
   const AppHeader = () => {
     const location = useLocation();
-    const prevLocation = usePreviousLocation();
+    const [isPriceWiseHovered, setIsPriceWiseHovered] = useState(false);
+    const [isBackHovered, setIsBackHovered] = useState(false);
+    const [isFavoriteHovered, setIsFavoriteHovered] = useState(false);
+
     const isOnFavoritePage = location.pathname === "/favorite";
     const isOnAboutPage = location.pathname === "/about";
     const isOnPrivacyPage = location.pathname === "/privacy";
 
     // Check if we are on one of the secondary pages
     const onSecondaryPage = isOnFavoritePage || isOnAboutPage || isOnPrivacyPage;
-    const cameFromResults = prevLocation && prevLocation.pathname.startsWith("/results");
 
-    const showBackToResults = onSecondaryPage && cameFromResults;
+    // Show "Back to Results" if we are on a secondary page and we have the right navigation state.
+    const showBackToResults = onSecondaryPage && location.state?.from === "results";
+
+    // If we are on the results page, set the state for the next navigation. Otherwise, preserve it.
+    const navState = location.pathname.startsWith("/results") ? { from: "results" } : location.state;
+
     return (
       <header style={bar}>
         <Link to="/" style={{ textDecoration: "none" }}>
-          <button style={pillBtn}>PriceWise</button>
+          <button
+            style={pillBtn(isPriceWiseHovered)}
+            onMouseEnter={() => setIsPriceWiseHovered(true)}
+            onMouseLeave={() => setIsPriceWiseHovered(false)}
+          >
+            PriceWise
+          </button>
         </Link>
         {showBackToResults && (
-          <Link to={-1} style={{ textDecoration: "none" }}>
-            <button style={pillBtn}>Back to Results</button>
+          <Link to="/results" style={{ textDecoration: "none" }}>
+            <button
+              style={pillBtn(isBackHovered)}
+              onMouseEnter={() => setIsBackHovered(true)}
+              onMouseLeave={() => setIsBackHovered(false)}
+            >
+              Back to Results
+            </button>
           </Link>
         )}
         <div style={{ display: "flex", gap: 12 }}>
-          {!isOnFavoritePage && <Link to="/favorite"><button style={pillBtn}>Favorite</button></Link>}
+          {!isOnFavoritePage && (
+            <Link to="/favorite" state={navState}>
+              <button
+                style={pillBtn(isFavoriteHovered)}
+                onMouseEnter={() => setIsFavoriteHovered(true)}
+                onMouseLeave={() => setIsFavoriteHovered(false)}
+              >
+                Favorite
+              </button>
+            </Link>
+          )}
         </div>
       </header>
     );
@@ -131,18 +166,40 @@ export default function App() {
   // A smaller component to handle the footer logic
   const AppFooter = () => {
     const location = useLocation();
+    const [isAboutHovered, setIsAboutHovered] = useState(false);
+    const [isPrivacyHovered, setIsPrivacyHovered] = useState(false);
+
     const isOnAboutPage = location.pathname === "/about";
     const isOnPrivacyPage = location.pathname === "/privacy";
+
+    // If we are on the results page, set the state for the next navigation. Otherwise, preserve it.
+    const navState = location.pathname.startsWith("/results") ? { from: "results" } : location.state;
 
     return (
       <footer style={bar}>
         {/* About link on the left, or a placeholder to maintain spacing */}
         {!isOnAboutPage ? (
-          <Link to="/about"><button style={pillBtn}>About</button></Link>
+          <Link to="/about" state={navState}>
+            <button
+              style={pillBtn(isAboutHovered)}
+              onMouseEnter={() => setIsAboutHovered(true)}
+              onMouseLeave={() => setIsAboutHovered(false)}
+            >
+              About
+            </button>
+          </Link>
         ) : <div />}
         {/* Privacy link on the right */}
         {!isOnPrivacyPage && (
-          <Link to="/privacy"><button style={pillBtn}>Privacy</button></Link>
+          <Link to="/privacy" state={navState}>
+            <button
+              style={pillBtn(isPrivacyHovered)}
+              onMouseEnter={() => setIsPrivacyHovered(true)}
+              onMouseLeave={() => setIsPrivacyHovered(false)}
+            >
+              Privacy
+            </button>
+          </Link>
         )}
       </footer>
     );
