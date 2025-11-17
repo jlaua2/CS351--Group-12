@@ -1,6 +1,7 @@
 // src/Components/ResultsPage.jsx
 import React, { useState, useMemo } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
+import { ImageIcon, Store } from "lucide-react"; // Using an icon for the placeholder
 import { mockProducts } from "../Data/mockProducts";
 
 // colors
@@ -11,6 +12,7 @@ const C = {
   mid: "#e3e3e3",
   border: "#cfcfcf",
   subtle: "#efefef",
+  white: "#ffffff",
   black: "#000000",
 };
 
@@ -27,27 +29,32 @@ const styles = {
     borderRight: `1px solid ${C.border}`,
     paddingRight: 20,
   },
-  sidebarTitle: { fontSize: 20, fontWeight: 700, margin: "8px 0 18px" },
-  filterRow: {
+  sidebarTitle: { fontSize: 18, fontWeight: 700, margin: "8px 0 18px" },
+  filterRow: (hovered) => ({
     display: "flex",
     alignItems: "center",
     gap: 12,
     marginBottom: 14,
-  },
+    padding: "8px",
+    borderRadius: 6,
+    background: hovered ? C.subtle : "transparent",
+    transition: "background 0.2s ease-in-out",
+    cursor: "pointer",
+  }),
   dot: (checked) => ({
     width: 24,
     height: 24,
     borderRadius: 999,
-    background: checked ? C.black : C.mid,
-    border: `1px solid ${C.border}`,
+    background: checked ? "linear-gradient(90deg, #ff8a00, #e52e71)" : C.mid,
+    border: checked ? 0 : `1px solid ${C.border}`,
     cursor: "pointer",
   }),
   sq: (checked) => ({
     width: 24,
     height: 24,
     borderRadius: 4,
-    background: checked ? C.black : C.mid,
-    border: `1px solid ${C.border}`,
+    background: checked ? "linear-gradient(90deg, #ff8a00, #e52e71)" : C.mid,
+    border: checked ? 0 : `1px solid ${C.border}`,
     cursor: "pointer",
   }),
 
@@ -61,35 +68,51 @@ const styles = {
   },
   titleLine: { display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" },
   title: { fontSize: 22, fontWeight: 800 },
-  refineBtn: {
-    background: C.mid,
-    border: `1px solid ${C.border}`,
-    borderRadius: 6,
+  refineBtn: (hovered) => ({
+    background: "linear-gradient(90deg, #ff8a00, #e52e71)",
+    color: C.white,
+    border: 0,
     padding: "8px 12px",
+    borderRadius: 6,
+    fontWeight: 600,
     cursor: "pointer",
-  },
+    transition: "all 0.3s ease-in-out",
+    boxShadow: hovered
+      ? "0 4px 15px rgba(255, 80, 120, 0.4)"
+      : "0 2px 8px rgba(0,0,0,0.1)",
+    transform: hovered ? "translateY(-2px)" : "translateY(0)",
+  }),
   productPic: {
     width: 360,
     height: 180,
-    background: C.mid,
+    background: C.subtle,
     border: `1px solid ${C.border}`,
     borderRadius: 6,
     display: "grid",
     placeItems: "center",
     fontWeight: 600,
-    color: "#333",
+    color: C.border,
   },
 
   // Sort row
   sortRow: { marginTop: 18, display: "flex", alignItems: "center", gap: 26 },
   sortLabel: { fontWeight: 700, fontSize: 18 },
-  radioWrap: { display: "flex", alignItems: "center", gap: 10 },
+  radioWrap: (hovered) => ({
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    padding: "8px",
+    borderRadius: 6,
+    background: hovered ? C.subtle : "transparent",
+    transition: "background 0.2s ease-in-out",
+    cursor: "pointer",
+  }),
   radioDot: (checked) => ({
     width: 22,
     height: 22,
     borderRadius: 999,
-    border: `2px solid ${C.black}`,
-    background: checked ? C.black : C.white,
+    border: `2px solid ${checked ? C.black : C.border}`,
+    background: checked ? "linear-gradient(90deg, #ff8a00, #e52e71)" : C.white,
   }),
   radioText: { fontSize: 16 },
 
@@ -111,15 +134,40 @@ const styles = {
   },
 
   // Card
-  card: {
-    background: C.mid,
+  card: (hovered) => ({
+    background: C.white,
     border: `1px solid ${C.border}`,
-    borderRadius: 6,
+    borderRadius: 8,
     padding: 18,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
     minHeight: 140,
+    transition: "all 0.3s ease-in-out",
+    boxShadow: hovered
+      ? "0 8px 25px rgba(0,0,0,0.1)"
+      : "0 4px 12px rgba(0,0,0,0.08)",
+    transform: hovered ? "translateY(-4px)" : "translateY(0)",
+  }),
+  cardContent: {
+    display: "flex",
+    gap: 18,
+    alignItems: "flex-start",
+  },
+  logoBox: {
+    flexShrink: 0,
+    width: 54,
+    height: 54,
+    borderRadius: 8,
+    background: C.subtle,
+    display: "grid",
+    placeItems: "center",
+    color: C.mid,
+  },
+  cardDetails: {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
   },
   cardTitle: { fontSize: 18, fontWeight: 800, margin: 0, color: C.ink },
   priceRow: { marginTop: 8, color: "#222" },
@@ -129,33 +177,59 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
   },
-  linkBtn: {
-    background: C.black,
+  linkBtn: (hovered) => ({
+    background: "linear-gradient(90deg, #ff8a00, #e52e71)",
     color: C.white,
     border: 0,
-    padding: "10px 14px",
-    borderRadius: 4,
+    padding: "8px 12px",
+    borderRadius: 6,
+    fontWeight: 600,
     cursor: "pointer",
-  },
+    transition: "all 0.3s ease-in-out",
+    boxShadow: hovered
+      ? "0 4px 15px rgba(255, 80, 120, 0.4)"
+      : "0 2px 8px rgba(0,0,0,0.1)",
+    transform: hovered ? "translateY(-2px)" : "translateY(0)",
+    textDecoration: "none",
+  }),
 };
 
 // Single product card
 const ProductResultCard = ({ product }) => {
   const total = product.price + product.shipping;
+  const [isCardHovered, setIsCardHovered] = useState(false);
+  const [isGoToSiteHovered, setIsGoToSiteHovered] = useState(false);
+
   return (
-    <div className="result-card" style={styles.card}>
-      <div>
-        <h4 style={styles.cardTitle}>{product.store}</h4>
-        <div style={styles.priceRow}>Price: ${product.price.toFixed(2)}</div>
-        <div style={styles.priceRow}>Shipping: ${product.shipping.toFixed(2)}</div>
-        <div style={styles.priceRow}>
-          Total Cost: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
+    <div
+      className="result-card"
+      style={styles.card(isCardHovered)}
+      onMouseEnter={() => setIsCardHovered(true)}
+      onMouseLeave={() => setIsCardHovered(false)}
+    >
+      <div style={styles.cardContent}>
+        <div style={styles.logoBox}>
+          <Store size={28} strokeWidth={1.5} />
         </div>
-      </div>
-      <div style={styles.linkBar}>
-        <a href={product.link} target="_blank" rel="noopener noreferrer">
-          <button style={styles.linkBtn}>GO TO SITE</button>
-        </a>
+        <div style={styles.cardDetails}>
+          <div>
+            <h4 style={styles.cardTitle}>{product.store}</h4>
+            <div style={styles.priceRow}>Price: ${product.price.toFixed(2)}</div>
+            <div style={styles.priceRow}>Shipping: ${product.shipping.toFixed(2)}</div>
+            <div style={styles.priceRow}>
+              Total Cost: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
+            </div>
+          </div>
+          <div style={styles.linkBar}>
+            <a href={product.link} target="_blank" rel="noopener noreferrer">
+              <button
+                style={styles.linkBtn(isGoToSiteHovered)}
+                onMouseEnter={() => setIsGoToSiteHovered(true)}
+                onMouseLeave={() => setIsGoToSiteHovered(false)}
+              >GO TO SITE</button>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -164,6 +238,13 @@ const ProductResultCard = ({ product }) => {
 export default function ResultsPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "Product";
+
+  // Hover states for filters and sorting
+  const [hoveredFilter, setHoveredFilter] = useState(null);
+  const [hoveredSort, setHoveredSort] = useState(null);
+
+  // Hover state for Refine Search button
+  const [isRefineHovered, setIsRefineHovered] = useState(false);
 
   // sorting and filtering state
   const [sortBy, setSortBy] = useState("total_cost_asc");
@@ -202,6 +283,24 @@ export default function ResultsPage() {
 
   const handleSortChange = (value) => setSortBy(value);
 
+  const handleInStoreFilterChange = () => {
+    const newInStoreState = !filterInStore;
+    setFilterInStore(newInStoreState);
+    // If "In Store" is being turned on, turn "Online" off.
+    if (newInStoreState) {
+      setFilterOnline(false);
+    }
+  };
+
+  const handleOnlineFilterChange = () => {
+    const newOnlineState = !filterOnline;
+    setFilterOnline(newOnlineState);
+    // If "Online" is being turned on, turn "In Store" off.
+    if (newOnlineState) {
+      setFilterInStore(false);
+    }
+  };
+
   return (
     <div className="results-page" style={styles.page}>
       <main className="content-area" style={styles.main}>
@@ -209,7 +308,11 @@ export default function ResultsPage() {
         <aside className="filter-sidebar" style={styles.sidebar}>
           <div style={styles.sidebarTitle}>Filter By:</div>
 
-          <label style={styles.filterRow}>
+          <label
+            style={styles.filterRow(hoveredFilter === "lowest")}
+            onMouseEnter={() => setHoveredFilter("lowest")}
+            onMouseLeave={() => setHoveredFilter(null)}
+          >
             <span style={styles.dot(filterLowest)} />
             <input
               type="checkbox"
@@ -220,23 +323,31 @@ export default function ResultsPage() {
             <span>Lowest</span>
           </label>
 
-          <label style={styles.filterRow}>
+          <label
+            style={styles.filterRow(hoveredFilter === "in-store")}
+            onMouseEnter={() => setHoveredFilter("in-store")}
+            onMouseLeave={() => setHoveredFilter(null)}
+          >
             <span style={styles.sq(filterInStore)} />
             <input
               type="checkbox"
               checked={filterInStore}
-              onChange={() => setFilterInStore(!filterInStore)}
+              onChange={handleInStoreFilterChange}
               style={{ display: "none" }}
             />
             <span>In Store Only</span>
           </label>
 
-          <label style={styles.filterRow}>
+          <label
+            style={styles.filterRow(hoveredFilter === "online")}
+            onMouseEnter={() => setHoveredFilter("online")}
+            onMouseLeave={() => setHoveredFilter(null)}
+          >
             <span style={styles.sq(filterOnline)} />
             <input
               type="checkbox"
               checked={filterOnline}
-              onChange={() => setFilterOnline(!filterOnline)}
+              onChange={handleOnlineFilterChange}
               style={{ display: "none" }}
             />
             <span>Online Only</span>
@@ -250,14 +361,24 @@ export default function ResultsPage() {
             <div>
               <div style={styles.titleLine}>
                 <h2 style={styles.title}>Result For: {query}</h2>
-                <button style={styles.refineBtn}>Refine Search Button</button>
+                <Link to="/" state={{ query: query }}>
+                  <button
+                    style={styles.refineBtn(isRefineHovered)}
+                    onMouseEnter={() => setIsRefineHovered(true)}
+                    onMouseLeave={() => setIsRefineHovered(false)}
+                  >Refine Search</button>
+                </Link>
               </div>
 
               {/* Sort row */}
               <div style={styles.sortRow}>
                 <span style={styles.sortLabel}>Sort By:</span>
 
-                <label style={styles.radioWrap}>
+                <label
+                  style={styles.radioWrap(hoveredSort === "asc")}
+                  onMouseEnter={() => setHoveredSort("asc")}
+                  onMouseLeave={() => setHoveredSort(null)}
+                >
                   <span style={styles.radioDot(sortBy === "total_cost_asc")} />
                   <input
                     type="radio"
@@ -267,10 +388,14 @@ export default function ResultsPage() {
                     onChange={() => handleSortChange("total_cost_asc")}
                     style={{ display: "none" }}
                   />
-                  <span style={styles.radioText}>Total Cost - Shipping</span>
+                  <span style={styles.radioText}>Total Cost: Low to High</span>
                 </label>
 
-                <label style={styles.radioWrap}>
+                <label
+                  style={styles.radioWrap(hoveredSort === "desc")}
+                  onMouseEnter={() => setHoveredSort("desc")}
+                  onMouseLeave={() => setHoveredSort(null)}
+                >
                   <span style={styles.radioDot(sortBy === "total_cost_desc")} />
                   <input
                     type="radio"
@@ -280,12 +405,14 @@ export default function ResultsPage() {
                     onChange={() => handleSortChange("total_cost_desc")}
                     style={{ display: "none" }}
                   />
-                  <span style={styles.radioText}>Total Cost + Shipping</span>
+                  <span style={styles.radioText}>Total Cost: High to Low</span>
                 </label>
               </div>
             </div>
 
-            <div style={styles.productPic}>Product Picture</div>
+            <div style={styles.productPic}>
+              <ImageIcon size={48} strokeWidth={1.5} />
+            </div>
           </div>
 
           <div style={styles.divider} />
