@@ -16,7 +16,6 @@ def union(self, x, y):
 
     if rootX == rootY:
         return False
-
     if self.rank[rootX] < self.rank[rootY]:
         self.parent[rootX] = rootY
     elif self.rank[rootX] > self.rank[rootY]:
