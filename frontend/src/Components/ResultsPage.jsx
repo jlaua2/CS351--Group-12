@@ -1,9 +1,7 @@
 // src/Components/ResultsPage.jsx
 import React, { useState, useMemo, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import { ImageIcon, Store } from "lucide-react";
-
-// REMOVED mockProducts import, as it's no longer needed.
+import { ImageIcon } from "lucide-react";
 
 // colors
 const C = {
@@ -30,6 +28,7 @@ const styles = {
     paddingRight: 20,
   },
   sidebarTitle: { fontSize: 18, fontWeight: 700, margin: "8px 0 18px" },
+
   filterRow: (hovered) => ({
     display: "flex",
     alignItems: "center",
@@ -41,6 +40,7 @@ const styles = {
     transition: "background 0.2s ease-in-out",
     cursor: "pointer",
   }),
+
   dot: (checked) => ({
     width: 24,
     height: 24,
@@ -49,6 +49,7 @@ const styles = {
     border: checked ? 0 : `1px solid ${C.border}`,
     cursor: "pointer",
   }),
+
   sq: (checked) => ({
     width: 24,
     height: 24,
@@ -81,6 +82,7 @@ const styles = {
       : "0 2px 8px rgba(0,0,0,0.1)",
     transform: hovered ? "translateY(-2px)" : "translateY(0)",
   }),
+
   productPic: {
     width: 360,
     height: 180,
@@ -144,21 +146,13 @@ const styles = {
       : "0 4px 12px rgba(0,0,0,0.08)",
     transform: hovered ? "translateY(-4px)" : "translateY(0)",
   }),
+
   cardContent: {
     display: "flex",
     gap: 18,
     alignItems: "flex-start",
   },
-  logoBox: {
-    flexShrink: 0,
-    width: 54,
-    height: 54,
-    borderRadius: 8,
-    background: C.subtle,
-    display: "grid",
-    placeItems: "center",
-    color: C.mid,
-  },
+
   cardDetails: {
     flex: 1,
     display: "flex",
@@ -167,6 +161,7 @@ const styles = {
   cardTitle: { fontSize: 18, fontWeight: 800, margin: 0, color: C.ink },
   priceRow: { marginTop: 8, color: "#222" },
   totalStrong: { fontWeight: 800 },
+
   linkBar: {
     marginTop: 12,
     display: "flex",
@@ -189,9 +184,20 @@ const styles = {
   }),
 };
 
-// Product Card
+// =========================================================
+// PRODUCT CARD
+// =========================================================
+
 const ProductResultCard = ({ product }) => {
-  const total = product.price + product.shipping;
+  const title = product.title || "Unknown Product";
+  const store = product.store || "Unknown Store";
+  const link = product.link || "https://google.com";
+  const thumbnail = product.thumbnail || "https://via.placeholder.com/80";
+
+  const price = Number(product.price) || 0;
+  const shipping = Number(product.shipping) || 0;
+  const total = price + shipping;
+
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isGoToSiteHovered, setIsGoToSiteHovered] = useState(false);
 
@@ -203,25 +209,39 @@ const ProductResultCard = ({ product }) => {
       onMouseLeave={() => setIsCardHovered(false)}
     >
       <div style={styles.cardContent}>
-        <div style={styles.logoBox}>
-          <Store size={28} strokeWidth={1.5} />
-        </div>
+        <img
+          src={thumbnail}
+          alt={title}
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: 6,
+            objectFit: "cover",
+            flexShrink: 0,
+            background: "#ddd",
+          }}
+        />
+
         <div style={styles.cardDetails}>
           <div>
-            <h4 style={styles.cardTitle}>{product.store}</h4>
-            <div style={styles.priceRow}>Price: ${product.price.toFixed(2)}</div>
-            <div style={styles.priceRow}>Shipping: ${product.shipping.toFixed(2)}</div>
+            <h4 style={styles.cardTitle}>{title}</h4>
+            <div style={styles.priceRow}>Store: {store}</div>
+            <div style={styles.priceRow}>Price: ${price.toFixed(2)}</div>
+            <div style={styles.priceRow}>Shipping: ${shipping.toFixed(2)}</div>
             <div style={styles.priceRow}>
-              Total Cost: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
+              Total: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
             </div>
           </div>
+
           <div style={styles.linkBar}>
-            <a href={product.link} target="_blank" rel="noopener noreferrer">
+            <a href={link} target="_blank" rel="noopener noreferrer">
               <button
                 style={styles.linkBtn(isGoToSiteHovered)}
                 onMouseEnter={() => setIsGoToSiteHovered(true)}
                 onMouseLeave={() => setIsGoToSiteHovered(false)}
-              >GO TO SITE</button>
+              >
+                GO TO SITE
+              </button>
             </a>
           </div>
         </div>
@@ -230,35 +250,38 @@ const ProductResultCard = ({ product }) => {
   );
 };
 
+// =========================================================
+// MAIN PAGE
+// =========================================================
+
 export default function ResultsPage() {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "Product";
 
-  // Hover states for filters and sorting
   const [hoveredFilter, setHoveredFilter] = useState(null);
   const [hoveredSort, setHoveredSort] = useState(null);
-
-  // Hover state for Refine Search button
   const [isRefineHovered, setIsRefineHovered] = useState(false);
 
-  // State for backend data
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // sorting and filtering state
   const [sortBy, setSortBy] = useState("total_cost_asc");
   const [filterLowest, setFilterLowest] = useState(false);
   const [filterInStore, setFilterInStore] = useState(false);
   const [filterOnline, setFilterOnline] = useState(false);
 
-  // Fetch data from backend API
   useEffect(() => {
     async function fetchResults() {
       try {
         setLoading(true);
-        const res = await fetch(`/api/search/?q=${encodeURIComponent(query)}`);
+
+        const res = await fetch(`/api/compare/?q=${encodeURIComponent(query)}`);
+
         const data = await res.json();
+
         setProducts(data.results || []);
+      } catch (err) {
+        console.error("Frontend fetch error:", err);
       } finally {
         setLoading(false);
       }
@@ -267,7 +290,6 @@ export default function ResultsPage() {
     fetchResults();
   }, [query]);
 
-  // Filtering
   const filteredProducts = useMemo(() => {
     let list = [...products];
 
@@ -282,7 +304,6 @@ export default function ResultsPage() {
     return list;
   }, [products, filterInStore, filterOnline, filterLowest]);
 
-  // Sorting
   const sortedAndFilteredProducts = useMemo(() => {
     const sorted = [...filteredProducts];
     sorted.sort((a, b) => {
@@ -296,19 +317,15 @@ export default function ResultsPage() {
   const handleSortChange = (value) => setSortBy(value);
 
   const handleInStoreFilterChange = () => {
-    const newInStoreState = !filterInStore;
-    setFilterInStore(newInStoreState);
-    if (newInStoreState) {
-      setFilterOnline(false);
-    }
+    const newState = !filterInStore;
+    setFilterInStore(newState);
+    if (newState) setFilterOnline(false);
   };
 
   const handleOnlineFilterChange = () => {
-    const newOnlineState = !filterOnline;
-    setFilterOnline(newOnlineState);
-    if (newOnlineState) {
-      setFilterInStore(false);
-    }
+    const newState = !filterOnline;
+    setFilterOnline(newState);
+    if (newState) setFilterInStore(false);
   };
 
   return (
@@ -373,7 +390,9 @@ export default function ResultsPage() {
                     style={styles.refineBtn(isRefineHovered)}
                     onMouseEnter={() => setIsRefineHovered(true)}
                     onMouseLeave={() => setIsRefineHovered(false)}
-                  >Refine Search</button>
+                  >
+                    Refine Search
+                  </button>
                 </Link>
               </div>
 
@@ -439,3 +458,4 @@ export default function ResultsPage() {
     </div>
   );
 }
+
