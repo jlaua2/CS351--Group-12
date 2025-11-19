@@ -275,9 +275,8 @@ export default function ResultsPage() {
       try {
         setLoading(true);
 
-        const res = await fetch(
-          `http://127.0.0.1:8000/api/compare/?q=${encodeURIComponent(query)}`
-        );
+        const res = await fetch(`/api/compare/?q=${encodeURIComponent(query)}`);
+
         const data = await res.json();
 
         setProducts(data.results || []);
