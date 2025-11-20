@@ -2,8 +2,9 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { ImageIcon } from "lucide-react";
-import { addFavorite } from "../utils/favorites";
+import { addFavorite, removeFavorite, getFavorites } from "../utils/favorites";
 import { Heart } from "lucide-react";
+
 
 
 // colors
@@ -203,6 +204,23 @@ const ProductResultCard = ({ product }) => {
 
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isGoToSiteHovered, setIsGoToSiteHovered] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  useEffect(() => {
+    const saved = getFavorites().some((p) => p.id === product.id);
+    setIsFavorited(saved);
+  }, [product.id]);
+
+  const toggleFavorite = () => {
+    if (isFavorited) {
+      removeFavorite(product.id);
+      setIsFavorited(false);
+    } else {
+      addFavorite(product);
+      setIsFavorited(true);
+    }
+  };
+
 
   return (
     <div
@@ -234,10 +252,8 @@ const ProductResultCard = ({ product }) => {
             <div style={styles.priceRow}>
               Total: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
             </div>
-
-            {/* ❤️ Add to Favorites */}
             <button
-              onClick={() => addFavorite(product)}
+              onClick={toggleFavorite}
               style={{
                 marginTop: 10,
                 padding: "6px 10px",
@@ -251,7 +267,11 @@ const ProductResultCard = ({ product }) => {
                 gap: 6,
               }}
             >
-              <Heart size={16} />
+              <Heart
+                size={16}
+                color={isFavorited ? "#ff8a00" : C.dark}
+                fill={isFavorited ? "#ff8a00" : "none"}
+              />
             </button>
           </div>
 
