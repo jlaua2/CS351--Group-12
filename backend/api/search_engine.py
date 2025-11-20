@@ -1,35 +1,41 @@
+# backend/api/search_engine.py
+
 from .data_structures.pricematchtrie import PriceMatchTrie
+from .data_structures.union import UnionFind
 
+# Create global instances of the data structures
 price_trie = PriceMatchTrie()
+union_find = UnionFind()
 
-# Insert demo products
-# TODO: Replace these with scraped or API data later
-price_trie.insert(
-    "iphone 15",
-    "Walmart",
-    699.99,
-    10.00,
-    "https://walmart.com/iphone15",
-    True,
-    True
-)
 
-price_trie.insert(
-    "iphone 15 case",
-    "Target",
-    19.99,
-    4.99,
-    "https://target.com/iphone15case",
-    True,
-    True
-)
+def initialize_structures():
+    """
+    Load all ProductResult rows into Trie & Union-Find.
 
-price_trie.insert(
-    "samsung galaxy s23",
-    "Amazon",
-    599.99,
-    0.00,
-    "https://amazon.com/s23",
-    False,
-    True
-)
+    NOTE: Must use lazy import to avoid Django AppRegistryNotReady errors.
+    """
+    from .models import ProductResult  # <-- CRITICAL lazy import
+
+    products = ProductResult.objects.all()  # type: ignore
+
+    # Rebuild Trie
+    price_trie.rebuild_from_products(products)
+
+    # Seed all product IDs into union-find
+    for p in products:
+        union_find.find(p.id)
+
+
+def autocomplete_products(prefix: str, limit: int = 10):
+    """Public API for Trie autocomplete."""
+    return price_trie.search_prefix(prefix, limit=limit)
+
+
+def union_products(id1, id2):
+    """Public API to union two product IDs."""
+    union_find.union(id1, id2)
+
+
+def get_product_group(product_id):
+    """Public API to get all IDs in same set."""
+    return union_find.group_members(product_id)

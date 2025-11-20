@@ -1,6 +1,6 @@
-from django.db import models
+# backend/api/models.py
 
-# Create your models here.
+from django.db import models  # type: ignore
 
 
 class ProductResult(models.Model):
@@ -10,12 +10,12 @@ class ProductResult(models.Model):
     price = models.FloatField()
     shipping = models.FloatField()
     link = models.URLField(max_length=500)
-    in_store = models.BooleanField(False)
-    online = models.BooleanField(True)
+    in_store = models.BooleanField(default=False)  # type: ignore
+    online = models.BooleanField(default=True)  # type: ignore
     created_at = models.DateTimeField(auto_now_add=True)
 
     def total_cost(self) -> float:
-        return self.price + self.shipping
+        return self.price + self.shipping  # type: ignore
 
     def __str__(self):
-        return f"{self.store} - {self.query}"
+        return f"{self.store}: {self.title} (${self.price})"
