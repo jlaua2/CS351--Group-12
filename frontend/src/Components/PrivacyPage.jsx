@@ -1,107 +1,124 @@
 // src/Components/PrivacyPage.jsx
-import React from "react";
+import React from 'react';
+
+// Color palette consistent with other pages
+const C = {
+  dark: "#2f2f2f",
+  ink: "#111111",
+  white: "#ffffff",
+  border: "#cfcfcf",
+  subtle: "#f7f7f7",
+  accent: "linear-gradient(90deg, #ff8a00, #e52e71)",
+};
 
 const styles = {
   page: {
-    fontFamily:
-      'system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif',
-    padding: "24px 48px",
-    flex: 1,
+    padding: '48px 24px',
+    maxWidth: 960,
+    margin: '0 auto',
+    fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif',
+    color: C.ink,
+    lineHeight: 1.7,
+  },
+  header: {
+    textAlign: 'center',
+    marginBottom: 64,
   },
   title: {
-    fontSize: "2rem",
-    marginBottom: "16px",
+    fontSize: 42,
+    fontWeight: 800,
+    marginBottom: 12,
+    background: C.accent,
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    color: "transparent",
+  },
+  subtitle: {
+    fontSize: 18,
+    color: '#555',
+    maxWidth: 600,
+    margin: '0 auto',
+  },
+  section: {
+    marginBottom: 40,
   },
   sectionTitle: {
-    fontSize: "1.5rem",
-    marginTop: "24px",
-    marginBottom: "12px",
+    fontSize: 24,
+    fontWeight: 700,
+    borderBottom: `2px solid ${C.border}`,
+    paddingBottom: 8,
+    marginBottom: 16,
   },
   text: {
-    fontSize: "1rem",
-    lineHeight: "1.5",
-    maxWidth: "800px",
-    marginBottom: "12px",
+    fontSize: 16,
+    color: '#333',
   },
   list: {
-    paddingLeft: "20px",
+    paddingLeft: 20,
   },
+  lastUpdated: {
+    textAlign: 'center',
+    color: '#777',
+    fontSize: 14,
+    marginTop: 48,
+  }
 };
 
-export default function PrivacyPage() {
+const PrivacyPage = () => {
   return (
-    <main style={styles.page}>
-      <h1 style={styles.title}>Privacy Policy for PriceWise</h1>
-      <p style={styles.text}>
-        This Privacy Policy explains how PriceWise ("we," "us," or "our")
-        collects, uses, and protects information in connection with the Price
-        Comparison App.
-      </p>
-      
-      <h2 style={styles.sectionTitle}>1. Information We Collect</h2>
-      <p style={styles.text}>
-        We only collect information necessary to provide the core functionality
-        of price comparison and service improvement.
-      </p>
-      
-      <h3 style={{ ...styles.sectionTitle, fontSize: "1.2rem" }}>
-        A. Information Collected Automatically (Usage Data)
-      </h3>
-      <ul style={styles.list}>
-        <li style={styles.text}>
-          <b>Search History:</b> We store your queries to improve search
-          performance, filtering, and Trie autocomplete training.
-        </li>
-        <li style={styles.text}>
-          <b>Interaction Data:</b> We log statistics on filter usage (In Store
-          Only, Lowest Price), sorting methods, and clicks to external
-          retailers.
-        </li>
-        <li style={styles.text}>
-          <b>Technical Information:</b> Standard information like IP address,
-          browser type, and device type is logged for security and monitoring
-          purposes.
-        </li>
-      </ul>
+    <div style={styles.page}>
+      <header style={styles.header}>
+        <h1 style={styles.title}>Privacy Policy</h1>
+        <p style={styles.subtitle}>
+          Your privacy is important to us. This policy explains what data we collect, why we collect it, and how we protect it.
+        </p>
+      </header>
 
-      <h2 style={styles.sectionTitle}>
-        2. How We Use Your Information
-      </h2>
-      <p style={styles.text}>
-        We use the collected data for the following purposes:
-      </p>
-      <ul style={styles.list}>
-        <li style={styles.text}>
-          <b>Service Delivery:</b> To aggregate prices and display search
-          results.
-        </li>
-        <li style={styles.text}>
-          <b>Service Improvement:</b> To analyze search patterns to improve the
-          accuracy and speed of our advanced data structures (Trie, Caching
-          Layer) and optimize API calls.
-        </li>
-      </ul>
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>1. Information We Collect</h2>
+        <p style={styles.text}>
+          To provide our core service, we collect a minimal amount of information:
+        </p>
+        <ul style={styles.list}>
+          <li>
+            <strong>Search Queries:</strong> We collect the product search terms you enter. This data is used to improve our search algorithm and understand product trends. It is always anonymized and aggregated, and never linked to an individual user.
+          </li>
+          <li>
+            <strong>Technical Information:</strong> We may collect non-personal technical information, such as browser type and operating system, to ensure our site functions correctly across all platforms.
+          </li>
+        </ul>
+      </section>
 
-      <h2 style={styles.sectionTitle}>3. Third-Party API Integration and Data Sharing</h2>
-      <p style={styles.text}>The core function of PriceWise relies on sending your search query to external service providers.</p>
-      <ul style={styles.list}>
-        <li style={styles.text}><b>Retailer APIs (Amazon, Walmart, Best Buy, etc.):</b> Your raw search query is sent to these third-party APIs to fetch real-time price data. We do not control how these third parties use the search data they receive.</li>
-        <li style={styles.text}><b>Anonymous Search:</b> We do not send your personal account details (email or user ID) to these APIs. All search requests are made anonymously by our backend server.</li>
-        <li style={styles.text}><b>External Links:</b> When you click a link to a retailer, you are redirected to their website. We are not responsible for the privacy practices of those sites.</li>
-      </ul>
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>2. How We Use Your Information</h2>
+        <p style={styles.text}>
+          The information we collect is used solely for the following purposes:
+        </p>
+        <ul style={styles.list}>
+          <li>
+            <strong>To Provide and Improve Our Services:</strong> Your search queries help us fetch relevant price comparisons and refine the accuracy of our results over time.
+          </li>
+          <li>
+            <strong>For Analytics:</strong> We analyze aggregated, anonymous data to understand how our service is used, which helps us make informed decisions about new features and improvements.
+          </li>
+        </ul>
+      </section>
 
-      <h2 style={styles.sectionTitle}>4. Data Storage and Security</h2>
-      <p style={styles.text}>We are committed to protecting the limited data we handle:</p>
-      <ul style={styles.list}>
-        <li style={styles.text}><b>API Keys and Secrets:</b> All sensitive credentials, including third-party API keys, are stored in environment variables during deployment on Render.</li>
-        <li style={styles.text}><b>Transmission Security:</b> All data transmission between your browser and our server is encrypted using HTTPS.</li>
-      </ul>
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>3. Data Sharing and Security</h2>
+        <p style={styles.text}>
+          We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties. Since we do not currently have user accounts, we do not store any personal data like names or email addresses. All data we handle is for operational purposes and is treated with strict confidentiality.
+        </p>
+      </section>
 
-      <h2 style={styles.sectionTitle}>5. Changes to This Policy</h2>
-      <p style={styles.text}>We reserve the right to update this Privacy Policy. We will notify you of any significant changes by updating the "Last Updated" date at the top of this document.</p>
-
-      <h2 style={styles.sectionTitle}>6. Contact Us</h2>
-      <p style={styles.text}>If you have any questions about this policy, please contact us @ jlaua2@uic.edu, mjame5@uic.edu, ayous11@uic.edu and jrodr300@uic.edu.</p>
-    </main>
+      <section style={styles.section}>
+        <h2 style={styles.sectionTitle}>4. Changes to This Policy</h2>
+        <p style={styles.text}>
+          We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page. You are advised to review this Privacy Policy periodically for any changes.
+        </p>
+      </section>
+    </div>
   );
-}
+};
+
+export default PrivacyPage;

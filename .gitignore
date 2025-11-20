@@ -10,6 +10,12 @@ frontend/node_modules/
 **/node_modules/
 npm-debug.log*
 
+# Frontend build & cache
+frontend/build/
+frontend/.cache/
+frontend/.eslintcache
+frontend/.env
+
 # Python cache
 **/*.pyc
 
