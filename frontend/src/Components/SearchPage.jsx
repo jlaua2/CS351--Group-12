@@ -3,30 +3,55 @@ import React, { useState, useEffect } from 'react';
 // import Header from './Header';
 // import Footer from './Footer';
 // Use react-router-dom's useNavigate for navigation
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isMounted, setIsMounted] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isButtonHovered, setIsButtonHovered] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-// figma design colors
-const color = {
-  dark: "#2f2f2f",
-  light: "#e3e3e3",
-  light2: "#efefef",
-  border: "#cfcfcf",
-  ink: "#111111",
-  white: "#ffffff",
-};
+  useEffect(() => {
+    if (searchTerm.length < 1) {
+      setSuggestions([]);
+      return;
+    }
 
-const page = {
+    const fetchSuggestions = async () => {
+      try {
+        const res = await fetch(
+          `http://127.0.0.1:8000/api/autocomplete/?q=${searchTerm}`
+        );
+        const data = await res.json();
+        setSuggestions(data);
+        setShowSuggestions(true);
+      } catch (err) {
+        console.error("Autocomplete error:", err);
+      }
+    };
+
+    fetchSuggestions();
+  }, [searchTerm]);
+
+
+  // figma design colors
+  const color = {
+    dark: "#2f2f2f",
+    light: "#e3e3e3",
+    light2: "#efefef",
+    border: "#cfcfcf",
+    ink: "#111111",
+    white: "#ffffff",
+  };
+
+  const page = {
     fontFamily:
       'system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif',
     color: color.ink,
@@ -58,6 +83,8 @@ const page = {
   });
 
   const searchRow = (focused) => ({
+    position: "relative",
+    overflow: "visible",
     display: "flex",
     alignItems: "center",
     gap: 12,
@@ -165,10 +192,16 @@ const page = {
             type="text"
             placeholder="Search Bar"
             value={searchTerm}
-            onFocus={() => setIsInputFocused(true)}
-            onBlur={() => setIsInputFocused(false)}
-            onChange={(e) => setSearchTerm(e.target.value)}
             style={input}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onFocus={() => {
+              setIsInputFocused(true);
+              if (suggestions.length > 0) setShowSuggestions(true);
+            }}
+            onBlur={() => {
+              setIsInputFocused(false);
+              setTimeout(() => setShowSuggestions(false), 150);
+            }}
           />
           <button
             type="submit"
@@ -178,6 +211,44 @@ const page = {
           >
             Search
           </button>
+          {showSuggestions && suggestions.length > 0 && (
+            <ul
+              style={{
+                position: "absolute",
+                top: "100%",
+                left: 0,
+                width: "100%",
+                background: color.white,
+                border: `1px solid ${color.border}`,
+                borderRadius: 6,
+                padding: 0,
+                marginTop: 4,
+                listStyle: "none",
+                maxHeight: 250,
+                overflowY: "auto",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                zIndex: 9999,
+              }}
+            >
+              {suggestions.map((s) => (
+                <li
+                  key={s.id}
+                  style={{
+                    padding: "12px",
+                    cursor: "pointer",
+                    borderBottom: `1px solid ${color.border}`,
+                  }}
+                  onMouseDown={() => {
+                    setSearchTerm(s.title);
+                    navigate(`/results?q=${encodeURIComponent(s.title)}`);
+                    setShowSuggestions(false);
+                  }}
+                >
+                  {s.title}
+                </li>
+              ))}
+            </ul>
+          )}
         </form>
 
         {/* Product placeholder block */}
@@ -194,7 +265,7 @@ const page = {
         </p>
       </main>
 
-    
+
     </div>
   );
 }
