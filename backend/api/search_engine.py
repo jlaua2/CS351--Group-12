@@ -9,21 +9,36 @@ union_find = UnionFind()
 
 
 def initialize_structures():
-    """
-    Load all ProductResult rows into Trie & Union-Find.
+    """Load all ProductResult data into Trie & Union-Find."""
 
-    NOTE: Must use lazy import to avoid Django AppRegistryNotReady errors.
-    """
-    from .models import ProductResult  # <-- CRITICAL lazy import
+    from .models import ProductResult
 
     products = ProductResult.objects.all()  # type: ignore
 
-    # Rebuild Trie
+    # Rebuild Trie from DB
     price_trie.rebuild_from_products(products)
 
-    # Seed all product IDs into union-find
     for p in products:
         union_find.find(p.id)
+
+    PRESET_TITLES = [
+        "iPhone 15",
+        "iPhone 14",
+        "iPhone 13",
+        "Samsung Galaxy S23",
+        "AirPods Pro",
+        "PlayStation 5",
+        "Nintendo Switch",
+        "MacBook Air",
+        "MacBook Pro 14-inch",
+        "Xbox Series X",
+        "Apple Watch Series 9",
+        "Google Pixel 8",
+    ]
+
+    for title in PRESET_TITLES:
+        # Add them as fake Trie entries
+        price_trie.insert(title.lower(), {"title": title})  # type: ignore
 
 
 def autocomplete_products(prefix: str, limit: int = 10):
