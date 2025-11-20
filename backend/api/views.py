@@ -1,9 +1,12 @@
 import os
 import requests
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from django.http import JsonResponse
 
 SERPAPI_KEY = os.environ.get("SERPAPI_KEY")
-
 
 
 def search(request):
@@ -16,11 +19,7 @@ def search(request):
         return JsonResponse({"error": "Missing SERPAPI_KEY"}, status=500)
 
     url = "https://serpapi.com/search.json"
-    params = {
-        "engine": "google",
-        "q": query,
-        "api_key": SERPAPI_KEY
-    }
+    params = {"engine": "google", "q": query, "api_key": SERPAPI_KEY}
 
     try:
         r = requests.get(url, params=params)
@@ -29,15 +28,16 @@ def search(request):
         return JsonResponse({"error": str(e)}, status=500)
 
     organic = data.get("organic_results", [])
-    results = [{
-        "title": item.get("title"),
-        "link": item.get("link"),
-        "snippet": item.get("snippet")
-    } for item in organic]
+    results = [
+        {
+            "title": item.get("title"),
+            "link": item.get("link"),
+            "snippet": item.get("snippet"),
+        }
+        for item in organic
+    ]
 
     return JsonResponse({"results": results})
-
-
 
 
 def compare_products(request):
@@ -50,12 +50,7 @@ def compare_products(request):
         return JsonResponse({"error": "SERPAPI_KEY missing"}, status=500)
 
     url = "https://serpapi.com/search.json"
-    params = {
-        "engine": "google_shopping",
-        "q": query,
-        "api_key": serp_key,
-        "num": 40
-    }
+    params = {"engine": "google_shopping", "q": query, "api_key": serp_key, "num": 40}
 
     try:
         response = requests.get(url, params=params)
@@ -78,20 +73,23 @@ def compare_products(request):
                 except:
                     price = 0
 
-            results.append({
-                "id": i,
-                "store": item.get("source", "Unknown Store"),
-                "title": item.get("title", "No title"),
-                "price": price,
-                "shipping": 0,
-                "link": item.get("link") or item.get("product_link"),
-                "thumbnail": item.get("thumbnail") or fallback_thumb,
-                "online": True,
-                "inStore": False
-            })
+            results.append(
+                {
+                    "id": i,
+                    "store": item.get("source", "Unknown Store"),
+                    "title": item.get("title", "No title"),
+                    "price": price,
+                    "shipping": 0,
+                    "link": item.get("link") or item.get("product_link"),
+                    "thumbnail": item.get("thumbnail") or fallback_thumb,
+                    "online": True,
+                    "inStore": False,
+                }
+            )
 
         return JsonResponse({"results": results})
 
     except Exception as e:
         print("ERROR:", e)
         return JsonResponse({"error": str(e)}, status=500)
+
