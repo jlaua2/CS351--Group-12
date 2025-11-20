@@ -310,7 +310,7 @@ export default function ResultsPage() {
   const [sortBy, setSortBy] = useState("total_cost_asc");
   const [filterLowest, setFilterLowest] = useState(false);
   const [filterInStore, setFilterInStore] = useState(false);
-  const [filterOnline, setFilterOnline] = useState(false);
+  const [filterOnline, setFilterOnline] = useState(true);
 
   useEffect(() => {
     async function fetchResults() {
