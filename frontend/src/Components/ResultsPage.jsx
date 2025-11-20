@@ -2,6 +2,9 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { ImageIcon } from "lucide-react";
+import { addFavorite } from "../utils/favorites";
+import { Heart } from "lucide-react";
+
 
 // colors
 const C = {
@@ -231,6 +234,25 @@ const ProductResultCard = ({ product }) => {
             <div style={styles.priceRow}>
               Total: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
             </div>
+
+            {/* ❤️ Add to Favorites */}
+            <button
+              onClick={() => addFavorite(product)}
+              style={{
+                marginTop: 10,
+                padding: "6px 10px",
+                borderRadius: 6,
+                border: `1px solid ${C.border}`,
+                background: "white",
+                cursor: "pointer",
+                fontSize: 14,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <Heart size={16} />
+            </button>
           </div>
 
           <div style={styles.linkBar}>
