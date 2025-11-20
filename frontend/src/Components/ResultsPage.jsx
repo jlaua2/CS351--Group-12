@@ -350,21 +350,6 @@ export default function ResultsPage() {
           </label>
 
           <label
-            style={styles.filterRow(hoveredFilter === "in-store")}
-            onMouseEnter={() => setHoveredFilter("in-store")}
-            onMouseLeave={() => setHoveredFilter(null)}
-          >
-            <span style={styles.sq(filterInStore)} />
-            <input
-              type="checkbox"
-              checked={filterInStore}
-              onChange={handleInStoreFilterChange}
-              style={{ display: "none" }}
-            />
-            <span>In Store Only</span>
-          </label>
-
-          <label
             style={styles.filterRow(hoveredFilter === "online")}
             onMouseEnter={() => setHoveredFilter("online")}
             onMouseLeave={() => setHoveredFilter(null)}
