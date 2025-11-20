@@ -2,6 +2,10 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { ImageIcon } from "lucide-react";
+import { addFavorite, removeFavorite, getFavorites } from "../utils/favorites";
+import { Heart } from "lucide-react";
+
+
 
 // colors
 const C = {
@@ -200,6 +204,23 @@ const ProductResultCard = ({ product }) => {
 
   const [isCardHovered, setIsCardHovered] = useState(false);
   const [isGoToSiteHovered, setIsGoToSiteHovered] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(false);
+
+  useEffect(() => {
+    const saved = getFavorites().some((p) => p.id === product.id);
+    setIsFavorited(saved);
+  }, [product.id]);
+
+  const toggleFavorite = () => {
+    if (isFavorited) {
+      removeFavorite(product.id);
+      setIsFavorited(false);
+    } else {
+      addFavorite(product);
+      setIsFavorited(true);
+    }
+  };
+
 
   return (
     <div
@@ -231,6 +252,27 @@ const ProductResultCard = ({ product }) => {
             <div style={styles.priceRow}>
               Total: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
             </div>
+            <button
+              onClick={toggleFavorite}
+              style={{
+                marginTop: 10,
+                padding: "6px 10px",
+                borderRadius: 6,
+                border: `1px solid ${C.border}`,
+                background: "white",
+                cursor: "pointer",
+                fontSize: 14,
+                display: "flex",
+                alignItems: "center",
+                gap: 6,
+              }}
+            >
+              <Heart
+                size={16}
+                color={isFavorited ? "#ff8a00" : C.dark}
+                fill={isFavorited ? "#ff8a00" : "none"}
+              />
+            </button>
           </div>
 
           <div style={styles.linkBar}>
@@ -268,7 +310,7 @@ export default function ResultsPage() {
   const [sortBy, setSortBy] = useState("total_cost_asc");
   const [filterLowest, setFilterLowest] = useState(false);
   const [filterInStore, setFilterInStore] = useState(false);
-  const [filterOnline, setFilterOnline] = useState(false);
+  const [filterOnline, setFilterOnline] = useState(true);
 
   useEffect(() => {
     async function fetchResults() {
