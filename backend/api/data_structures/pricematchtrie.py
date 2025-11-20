@@ -1,74 +1,49 @@
-class PriceMatchTrieNode:
-    def __init__(self):
-        self.children = {}
-        self.is_end_of_word = False
-        self.retailers = {}  # store_name -> offer_dict
+# backend/api/data_structures/pricematchtrie.py
+
+from typing import Iterable, List, Dict, Any
+from .trie import Trie
 
 
 class PriceMatchTrie:
     def __init__(self):
-        self.root = PriceMatchTrieNode()
+        self.trie = Trie()
 
-    def insert(self, product_name, store_name, price, shipping, link, in_store, online):
+    def rebuild_from_products(self, products: Iterable[Any]) -> None:
+        """Rebuild the Trie using existing ProductResult objects."""
+        self.trie = Trie()
+        for product in products:
+            title = getattr(product, "title", None)
+            if title:
+                self.trie.insert(title, item=product)
+
+    def add_product(self, product: Any) -> None:
+        """Insert a single ProductResult into the Trie."""
+        title = getattr(product, "title", None)
+        if title:
+            self.trie.insert(title, item=product)
+
+    def search_prefix(self, prefix: str, limit: int = 10) -> List[Dict[str, Any]]:
         """
-        Insert a product offer into trie.
-        product_name: full name of product, e.g., "iphone 17 pro"
-        store_name: store string
-        price, shipping: numbers
-        link: URL
-        in_store, online: booleans
+        Returns autocomplete results as a clean list of dictionaries.
         """
-        node = self.root
-        name = product_name.lower().strip()
+        matches = self.trie.autocomplete(prefix, limit=limit)
+        results: List[Dict[str, Any]] = []
 
-        for char in name:
-            if char not in node.children:
-                node.children[char] = PriceMatchTrieNode()
-            node = node.children[char]
+        for word, product in matches:
+            if product is None:
+                continue
 
-        node.is_end_of_word = True
+            results.append(
+                {
+                    "id": getattr(product, "id", None),
+                    "title": getattr(product, "title", word),
+                    "store": getattr(product, "store", ""),
+                    "price": getattr(product, "price", 0),
+                    "shipping": getattr(product, "shipping", 0),
+                    "link": getattr(product, "link", ""),
+                    "in_store": getattr(product, "in_store", False),
+                    "online": getattr(product, "online", True),
+                }
+            )
 
-        # Store complete offer dictionary
-        node.retailers[store_name] = {
-            "store": store_name,
-            "price": price,
-            "shipping": shipping,
-            "link": link,
-            "inStore": in_store,
-            "online": online,
-        }
-
-    def search(self, product_name):
-        """
-        Prefix search:
-        - search("ip") matches "iphone 17 pro"
-        - search("iphone 17") matches "iphone 17 pro"
-        - search("iphone 17 pro") matches exactly
-        """
-        query = product_name.lower().strip()
-
-        # Traverse down the trie as far as the query matches
-        node = self.root
-        for char in query:
-            if char not in node.children:
-                return None
-            node = node.children[char]
-
-        # Collect all retailers from this node downward
-        results = self._collect_retailers(node)
         return results
-
-    def _collect_retailers(self, node):
-        """Recursively gather all offer dictionaries in subtree."""
-        collected = {}
-
-        if node.is_end_of_word:
-            collected.update(node.retailers)
-
-        # Recurse through children
-        for child in node.children.values():
-            child_results = self._collect_retailers(child)
-            if child_results:
-                collected.update(child_results)
-
-        return collected

@@ -21,3 +21,10 @@ frontend/.env
 
 # VSCode
 .vscode/
+
+# MacOS
+.DS_Store
+
+# Environment variables
+.env
+*.env

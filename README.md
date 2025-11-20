@@ -19,6 +19,24 @@ Prior to 9/28: Meet together weekly to target project weakpoints/bugs and possib
 
 During week of 10/2: Submit Milestone 2 and make sure we are good to go on our plan/schedule
 
+During week of 10/9: Make tasks for everyone to do. Joel: Implement 2 functional pages and finish figma, Michael: fix up frontend pages, Anthony: Create Trie data structure, Javi: Implement base backend.
+
+During week of 10/16: Finish up tasks for milestone 3 by getting 2 main pages implemented by Figma designes into frontend and getting the Tries done in the backend.
+
+During week of 10/23: Submit Milestone 3 and Peer Review with group 16.
+
+During week of 10/30: Break Week
+
+During week of 11/6: Started plans for Milestone 4 and assigning tasks. Michael: Frontend and Backend communication, Joel: Implementing rest of pages and styling, Anthony: Implementing second data structure of Union, Javi: Implement all API functionality and make sure everything can be accessed.
+
+During week of 11/13: Finishing up tasks and making sure no bugs occur during demo and creating slides.
+
+During week of 11/20: Submit Milestone 4 and Demo to TA.
+
+During week of 11/27: Thanksgiving Break/Make sure we revise out project based on TA feedback.
+
+During week of 12/2: Present Slides and Demo Video.
+
 ---
 
 # Communication  
@@ -182,17 +200,11 @@ Best Buy API – returns product catalog data including prices, availability, an
 
 Target API / Web Scraping with SerpApi – for Target store products if a public API is unavailable.
 
-PriceRunner / PriceSpider APIs (optional) – meta price-comparison services that aggregate multiple retailers.
-
 Data we will pull:
 
-Product names, prices, and discounts.
-
-Store/retailer availability (in stock / out of stock).
+Product names and prices with/without tax.
 
 Links to product pages for purchase.
-
-Optional: shipping cost and delivery time (if provided).
 
 Usage in the app:
 
