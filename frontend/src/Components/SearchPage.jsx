@@ -251,15 +251,6 @@ const SearchPage = () => {
           )}
         </form>
 
-        {/* Product placeholder block */}
-        <div style={productCard(isMounted)}>
-          <div style={cardImagePlaceholder} />
-          <div>
-            <div style={cardTextPlaceholder("80%")} />
-            <div style={cardTextPlaceholder("50%")} />
-          </div>
-        </div>
-
         <p style={tagline(isMounted)}>
           Stop Overpaying. We instantly find the best price per product.
         </p>

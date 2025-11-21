@@ -87,17 +87,7 @@ const styles = {
     transform: hovered ? "translateY(-2px)" : "translateY(0)",
   }),
 
-  productPic: {
-    width: 360,
-    height: 180,
-    background: C.subtle,
-    border: `1px solid ${C.border}`,
-    borderRadius: 6,
-    display: "grid",
-    placeItems: "center",
-    fontWeight: 600,
-    color: C.border,
-  },
+
 
   sortRow: { marginTop: 18, display: "flex", alignItems: "center", gap: 26 },
   sortLabel: { fontWeight: 700, fontSize: 18 },
@@ -462,9 +452,6 @@ export default function ResultsPage() {
               </div>
             </div>
 
-            <div style={styles.productPic}>
-              <ImageIcon size={48} strokeWidth={1.5} />
-            </div>
           </div>
 
           <div style={styles.divider} />
