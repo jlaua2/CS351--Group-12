@@ -1,23 +1,19 @@
-# backend/api/views.py
-
 import os
 import requests
 from dotenv import load_dotenv
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
 
 from .models import ProductResult
-from . import search_engine  # safe import (no circular dependency)
+from . import search_engine  # safe import
 
 load_dotenv()
-
 SERPAPI_KEY = os.environ.get("SERPAPI_KEY")
 
 
 # ---------------------------------------------------------
-# EXISTING SERPAPI SEARCH (unchanged)
+# BASIC SERPAPI SEARCH
 # ---------------------------------------------------------
 def search(request):
     query = request.GET.get("q", "").strip()
@@ -51,7 +47,7 @@ def search(request):
 
 
 # ---------------------------------------------------------
-# EXISTING SERPAPI SHOPPING COMPARISON (cleaned and safe)
+# SHOPPING COMPARISON — MERGED VERSION
 # ---------------------------------------------------------
 def compare_products(request):
     query = request.GET.get("q", "").strip()
@@ -70,38 +66,47 @@ def compare_products(request):
     try:
         response = requests.get(url, params=params)
         data = response.json()
-        shopping = data.get("shopping_results", [])
 
+        shopping = data.get("shopping_results", [])
         results = []
-        fallback_thumb = "https://via.placeholder.com/80"
+
+        fallback_thumb = "https://via.placeholder.com/200?text=No+Image"
 
         for item in shopping:
-            # Extract price safely
+            # extract price safely
             price = 0
-            if item.get("extracted_price") is not None:
-                price = float(item["extracted_price"])
-            elif item.get("price"):
+            raw_price = item.get("extracted_price") or item.get("price")
+            if raw_price:
                 try:
-                    price = float(item["price"].replace("$", "").replace(",", ""))
+                    price = float(str(raw_price).replace("$", "").replace(",", ""))
                 except:
                     price = 0
 
-            # Save to database
-            saved = ProductResult.objects.create(  # type: ignore
+            # choose best thumbnail
+            thumbnail = (
+                item.get("thumbnail")
+                or item.get("product_link_image")
+                or item.get("source_image")
+                or fallback_thumb
+            )
+
+            # save to database
+            saved = ProductResult.objects.create(
                 query=query,
                 store=item.get("source", "Unknown Store"),
                 title=item.get("title", "No title"),
                 price=price,
                 shipping=0,
-                link=item.get("link") or item.get("product_link"),
+                link=item.get("product_link") or item.get("link"),
                 in_store=False,
                 online=True,
             )
 
-            # Add to Trie + Union-Find
+            # add to Trie + Union Find
             search_engine.price_trie.add_product(saved)
             search_engine.union_find.find(saved.id)
 
+            # frontend result object
             results.append(
                 {
                     "id": saved.id,
@@ -110,7 +115,7 @@ def compare_products(request):
                     "price": saved.price,
                     "shipping": saved.shipping,
                     "link": saved.link,
-                    "thumbnail": item.get("thumbnail") or fallback_thumb,
+                    "thumbnail": thumbnail,
                     "in_store": saved.in_store,
                     "online": saved.online,
                 }
@@ -124,7 +129,7 @@ def compare_products(request):
 
 
 # ---------------------------------------------------------
-# NEW — TRIE AUTOCOMPLETE
+# AUTOCOMPLETE (Trie)
 # ---------------------------------------------------------
 @api_view(["GET"])
 def autocomplete(request):
@@ -134,7 +139,7 @@ def autocomplete(request):
 
 
 # ---------------------------------------------------------
-# NEW — UNION TWO PRODUCT IDs
+# UNION TWO PRODUCT IDS
 # ---------------------------------------------------------
 @api_view(["POST"])
 def union_ids(request):
@@ -149,7 +154,7 @@ def union_ids(request):
 
 
 # ---------------------------------------------------------
-# NEW — GET GROUP FOR PRODUCT ID
+# GET GROUP FOR PRODUCT ID
 # ---------------------------------------------------------
 @api_view(["GET"])
 def get_group(request, product_id):

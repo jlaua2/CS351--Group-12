@@ -1,11 +1,9 @@
 // src/Components/ResultsPage.jsx
+
 import React, { useState, useMemo, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, Heart } from "lucide-react";
 import { addFavorite, removeFavorite, getFavorites } from "../utils/favorites";
-import { Heart } from "lucide-react";
-
-
 
 // colors
 const C = {
@@ -72,6 +70,7 @@ const styles = {
   },
   titleLine: { display: "flex", alignItems: "center", gap: 14, flexWrap: "wrap" },
   title: { fontSize: 22, fontWeight: 800 },
+
   refineBtn: (hovered) => ({
     background: "linear-gradient(90deg, #ff8a00, #e52e71)",
     color: C.white,
@@ -87,10 +86,23 @@ const styles = {
     transform: hovered ? "translateY(-2px)" : "translateY(0)",
   }),
 
-
+  // 🔥 Final merged product preview box
+  productPic: {
+    width: 360,
+    height: 180,
+    background: C.subtle,
+    border: `1px solid ${C.border}`,
+    borderRadius: 6,
+    display: "grid",
+    placeItems: "center",
+    fontWeight: 600,
+    color: C.border,
+    overflow: "hidden",
+  },
 
   sortRow: { marginTop: 18, display: "flex", alignItems: "center", gap: 26 },
   sortLabel: { fontWeight: 700, fontSize: 18 },
+
   radioWrap: (hovered) => ({
     display: "flex",
     alignItems: "center",
@@ -101,6 +113,7 @@ const styles = {
     transition: "background 0.2s ease-in-out",
     cursor: "pointer",
   }),
+
   radioDot: (checked) => ({
     width: 22,
     height: 22,
@@ -108,6 +121,7 @@ const styles = {
     border: `2px solid ${checked ? C.black : C.border}`,
     background: checked ? "linear-gradient(90deg, #ff8a00, #e52e71)" : C.white,
   }),
+
   radioText: { fontSize: 16 },
 
   divider: { marginTop: 18, height: 1, background: C.border },
@@ -161,6 +175,7 @@ const styles = {
     display: "flex",
     justifyContent: "flex-end",
   },
+
   linkBtn: (hovered) => ({
     background: "linear-gradient(90deg, #ff8a00, #e52e71)",
     color: C.white,
@@ -211,7 +226,6 @@ const ProductResultCard = ({ product }) => {
     }
   };
 
-
   return (
     <div
       className="result-card"
@@ -242,6 +256,7 @@ const ProductResultCard = ({ product }) => {
             <div style={styles.priceRow}>
               Total: <span style={styles.totalStrong}>${total.toFixed(2)}</span>
             </div>
+
             <button
               onClick={toggleFavorite}
               style={{
@@ -306,11 +321,10 @@ export default function ResultsPage() {
     async function fetchResults() {
       try {
         setLoading(true);
-
-        const res = await fetch(`/api/compare/?q=${encodeURIComponent(query)}`);
-
+        const res = await fetch(
+          `http://127.0.0.1:8000/api/compare/?q=${encodeURIComponent(query)}`
+        );
         const data = await res.json();
-
         setProducts(data.results || []);
       } catch (err) {
         console.error("Frontend fetch error:", err);
@@ -346,19 +360,8 @@ export default function ResultsPage() {
     return sorted;
   }, [filteredProducts, sortBy]);
 
-  const handleSortChange = (value) => setSortBy(value);
-
-  const handleInStoreFilterChange = () => {
-    const newState = !filterInStore;
-    setFilterInStore(newState);
-    if (newState) setFilterOnline(false);
-  };
-
-  const handleOnlineFilterChange = () => {
-    const newState = !filterOnline;
-    setFilterOnline(newState);
-    if (newState) setFilterInStore(false);
-  };
+  // 🔥 Preview first result
+  const previewProduct = sortedAndFilteredProducts[0];
 
   return (
     <div className="results-page" style={styles.page}>
@@ -390,7 +393,7 @@ export default function ResultsPage() {
             <input
               type="checkbox"
               checked={filterOnline}
-              onChange={handleOnlineFilterChange}
+              onChange={() => setFilterOnline(!filterOnline)}
               style={{ display: "none" }}
             />
             <span>Online Only</span>
@@ -402,7 +405,8 @@ export default function ResultsPage() {
             <div>
               <div style={styles.titleLine}>
                 <h2 style={styles.title}>Result For: {query}</h2>
-                <Link to="/" state={{ query: query }}>
+
+                <Link to="/" state={{ query }}>
                   <button
                     style={styles.refineBtn(isRefineHovered)}
                     onMouseEnter={() => setIsRefineHovered(true)}
@@ -427,7 +431,7 @@ export default function ResultsPage() {
                     name="sort"
                     value="total_cost_asc"
                     checked={sortBy === "total_cost_asc"}
-                    onChange={() => handleSortChange("total_cost_asc")}
+                    onChange={() => setSortBy("total_cost_asc")}
                     style={{ display: "none" }}
                   />
                   <span style={styles.radioText}>Total Cost: Low to High</span>
@@ -444,7 +448,7 @@ export default function ResultsPage() {
                     name="sort"
                     value="total_cost_desc"
                     checked={sortBy === "total_cost_desc"}
-                    onChange={() => handleSortChange("total_cost_desc")}
+                    onChange={() => setSortBy("total_cost_desc")}
                     style={{ display: "none" }}
                   />
                   <span style={styles.radioText}>Total Cost: High to Low</span>
@@ -452,6 +456,59 @@ export default function ResultsPage() {
               </div>
             </div>
 
+            {/* 🔥 Product preview box */}
+            <div style={styles.productPic}>
+              {previewProduct ? (
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: 12,
+                    textAlign: "center",
+                  }}
+                >
+                  <img
+                    src={previewProduct.thumbnail}
+                    alt={previewProduct.title}
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: 110,
+                      objectFit: "contain",
+                      borderRadius: 6,
+                      background: "#ffffff",
+                    }}
+                  />
+
+                  <div
+                    style={{
+                      fontSize: 14,
+                      fontWeight: 600,
+                      color: C.ink,
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: "vertical",
+                    }}
+                  >
+                    {previewProduct.title}
+                  </div>
+
+                  <div style={{ fontSize: 14 }}>
+                    $
+                    {(
+                      (Number(previewProduct.price) || 0) +
+                      (Number(previewProduct.shipping) || 0)
+                    ).toFixed(2)}{" "}
+                    total
+                  </div>
+                </div>
+              ) : (
+                <ImageIcon size={48} strokeWidth={1.5} />
+              )}
+            </div>
           </div>
 
           <div style={styles.divider} />
@@ -472,4 +529,3 @@ export default function ResultsPage() {
     </div>
   );
 }
-
