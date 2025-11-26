@@ -39,7 +39,6 @@ import {
 import SearchPage from "./Components/SearchPage.jsx";
 import ResultsPage from "./Components/ResultsPage.jsx";
 import PrivacyPage from "./Components/PrivacyPage.jsx";
-import AboutPage from "./Components/AboutPage.jsx";
 import FavoritePage from "./Components/FavoritePage.jsx";
 
 export default function App() {
@@ -166,10 +165,8 @@ export default function App() {
   // A smaller component to handle the footer logic
   const AppFooter = () => {
     const location = useLocation();
-    const [isAboutHovered, setIsAboutHovered] = useState(false);
     const [isPrivacyHovered, setIsPrivacyHovered] = useState(false);
 
-    const isOnAboutPage = location.pathname === "/about";
     const isOnPrivacyPage = location.pathname === "/privacy";
 
     // If we are on the results page, set the state for the next navigation. Otherwise, preserve it.
@@ -177,18 +174,8 @@ export default function App() {
 
     return (
       <footer style={bar}>
-        {/* About link on the left, or a placeholder to maintain spacing */}
-        {!isOnAboutPage ? (
-          <Link to="/about" state={navState}>
-            <button
-              style={pillBtn(isAboutHovered)}
-              onMouseEnter={() => setIsAboutHovered(true)}
-              onMouseLeave={() => setIsAboutHovered(false)}
-            >
-              About
-            </button>
-          </Link>
-        ) : <div />}
+        {/* Placeholder to maintain spacing */}
+        <div />
         {/* Privacy link on the right */}
         {!isOnPrivacyPage && (
           <Link to="/privacy" state={navState}>
@@ -221,12 +208,11 @@ export default function App() {
         <AppHeader />
 
         {/* Main route content */}
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, overflow: "hidden" }}>
           <Routes>
             <Route path="/" element={<SearchPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/about" element={<AboutPage />} />
             <Route path="/favorite" element={<FavoritePage />} />
           </Routes>
         </div>
