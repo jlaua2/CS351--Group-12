@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
-// Assuming you have Header and Footer components
-// import Header from './Header';
-// import Footer from './Footer';
-// Use react-router-dom's useNavigate for navigation
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
+import { Target, DollarSign, Clock } from 'lucide-react'; 
 
 const SearchPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -24,6 +21,7 @@ const color = {
   border: "#cfcfcf",
   ink: "#111111",
   white: "#ffffff",
+  subtle: "#f7f7f7",
 };
 
 const page = {
@@ -31,17 +29,31 @@ const page = {
       'system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif',
     color: color.ink,
     background: color.white,
-    minHeight: "100vh",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
+    overflow: "hidden",
+    width: "100%",
+    maxHeight: "100%",
   };
 
   const container = {
     width: "100%",
-    maxWidth: 1080,
-    margin: "0 auto",
-    padding: "48px 24px 24px",
     flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    overflow: "hidden",
+    padding: "16px",
+  };
+
+  const contentWrapper = {
+    width: "100%",
+    maxWidth: 1080,
+    display: "flex",
+    flexDirection: "column",
+    gap: 24,
   };
 
   const hero = (mounted) => ({
@@ -133,14 +145,66 @@ const page = {
   const tagline = (mounted) => ({
     fontSize: "1.2rem",
     fontWeight: 600,
-    margin: "6px 0 28px",
+    margin: "6px 0 12px",
     opacity: mounted ? 1 : 0,
-    transition: "opacity 1s ease-in-out 0.2s", // Added a 0.2s delay
+    transition: "opacity 1s ease-in-out 0.2s",
     background: "linear-gradient(90deg, #ff8a00, #e52e71)",
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
     color: "transparent",
   });
+
+  const aboutSection = {
+    marginTop: 12,
+    paddingTop: 12,
+    borderTop: `1px solid ${color.border}`,
+  };
+
+  const aboutTitle = {
+    fontSize: 18,
+    fontWeight: 700,
+    marginBottom: 8,
+    color: color.ink,
+  };
+
+  const featureGrid = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+    gap: 12,
+    marginTop: 12,
+  };
+
+  const featureCard = {
+    background: color.white,
+    border: `1px solid ${color.border}`,
+    borderRadius: 6,
+    padding: 12,
+    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+    textAlign: "center",
+    fontSize: 13,
+  };
+
+  const iconWrapper = {
+    display: "inline-flex",
+    padding: 8,
+    borderRadius: "50%",
+    background: color.subtle,
+    marginBottom: 6,
+    color: color.dark,
+  };
+
+  const featureTitle = {
+    fontSize: 14,
+    fontWeight: 600,
+    marginBottom: 4,
+    color: color.ink,
+  };
+
+  const featureText = {
+    fontSize: 12,
+    color: "#666",
+    lineHeight: 1.4,
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -150,51 +214,74 @@ const page = {
 
   return (
     <div style={page}>
-
-      {/* Main content */}
       <main style={container}>
-        <h1 style={hero(isMounted)}>
-          Compare Prices.
-          <br />
-          Save More.
-        </h1>
+        <div style={contentWrapper}>
+          <h1 style={hero(isMounted)}>
+            Compare Prices.
+            <br />
+            Save More.
+          </h1>
 
-        {/* Gray search strip with white input and bordered button */}
-        <form onSubmit={handleSearch} role="search" aria-label="Product search" style={searchRow(isInputFocused)}>
-          <input
-            type="text"
-            placeholder="Search Bar"
-            value={searchTerm}
-            onFocus={() => setIsInputFocused(true)}
-            onBlur={() => setIsInputFocused(false)}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            style={input}
-          />
-          <button
-            type="submit"
-            style={searchBtn(isButtonHovered)}
-            onMouseEnter={() => setIsButtonHovered(true)}
-            onMouseLeave={() => setIsButtonHovered(false)}
-          >
-            Search
-          </button>
-        </form>
+          {/* Search form */}
+          <form onSubmit={handleSearch} role="search" aria-label="Product search" style={searchRow(isInputFocused)}>
+            <input
+              type="text"
+              placeholder="Search Bar"
+              value={searchTerm}
+              onFocus={() => setIsInputFocused(true)}
+              onBlur={() => setIsInputFocused(false)}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              style={input}
+            />
+            <button
+              type="submit"
+              style={searchBtn(isButtonHovered)}
+              onMouseEnter={() => setIsButtonHovered(true)}
+              onMouseLeave={() => setIsButtonHovered(false)}
+            >
+              Compare
+            </button>
+          </form>
 
-        {/* Product placeholder block */}
-        <div style={productCard(isMounted)}>
-          <div style={cardImagePlaceholder} />
-          <div>
-            <div style={cardTextPlaceholder("80%")} />
-            <div style={cardTextPlaceholder("50%")} />
-          </div>
+          <p style={tagline(isMounted)}>
+            Stop Overpaying. We instantly find the best price per product.
+          </p>
+
+          {/* About Section */}
+          <section style={aboutSection}>
+            <h2 style={aboutTitle}>How It Works</h2>
+            <div style={featureGrid}>
+              <div style={featureCard}>
+                <div style={iconWrapper}>
+                  <Target size={20} strokeWidth={1.5} />
+                </div>
+                <h4 style={featureTitle}>Simple Search</h4>
+                <p style={featureText}>
+                  Type the product. We search multiple stores for you.
+                </p>
+              </div>
+              <div style={featureCard}>
+                <div style={iconWrapper}>
+                  <DollarSign size={20} strokeWidth={1.5} />
+                </div>
+                <h4 style={featureTitle}>True Cost</h4>
+                <p style={featureText}>
+                  Price + shipping = real total. Informed decisions.
+                </p>
+              </div>
+              <div style={featureCard}>
+                <div style={iconWrapper}>
+                  <Clock size={20} strokeWidth={1.5} />
+                </div>
+                <h4 style={featureTitle}>Save Time</h4>
+                <p style={featureText}>
+                  Instantly find the best price for any product.
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
-
-        <p style={tagline(isMounted)}>
-          Stop Overpaying. We instantly find the best price per product.
-        </p>
       </main>
-
-    
     </div>
   );
 }
