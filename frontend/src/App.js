@@ -1,32 +1,3 @@
-// import React from 'react';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import SearchPage from './Components/SearchPage.jsx';    // Ensure path matches your structure
-// import ResultsPage from './Components/ResultsPage.jsx'; // Ensure path matches your structure
-
-// function App() {
-//   return (
-//     <Router>
-//       <div className="App">
-//         {/* Placeholder Header and Footer for visual consistency */}
-//         <header style={{ padding: '10px', background: '#333', color: 'white' }}>
-//           PriceWise Header - Login/Signup | Favorite
-//         </header>
-
-//         <Routes>
-//           {/* Route for the Search Page (Homepage) */}
-//           <Route path="/" element={<SearchPage />} />
-          
-//           {/* Route for the Results Page */}
-//           <Route path="/results" element={<ResultsPage />} />
-//         </Routes>
-
-//         <footer style={{ padding: '10px', background: '#333', color: 'white', marginTop: '50px' }}>
-//           About | Privacy
-//         </footer>
-//       </div>
-//     </Router>
-//   );
-// }
 // src/App.js
 import React, { useState, useRef, useEffect } from "react";
 import {
@@ -39,7 +10,6 @@ import {
 import SearchPage from "./Components/SearchPage.jsx";
 import ResultsPage from "./Components/ResultsPage.jsx";
 import PrivacyPage from "./Components/PrivacyPage.jsx";
-import AboutPage from "./Components/AboutPage.jsx";
 import FavoritePage from "./Components/FavoritePage.jsx";
 
 export default function App() {
@@ -59,24 +29,6 @@ export default function App() {
     justifyContent: "space-between",
   };
 
-  const brandWrap = { display: "flex", alignItems: "center", gap: 10 };
-  const logo = {
-    width: 36,
-    height: 36,
-    borderRadius: 999,
-    background: "#555",
-    color: "#fff",
-    fontSize: 12,
-    display: "grid",
-    placeItems: "center",
-  };
-  const brandPill = {
-    background: "rgba(255,255,255,0.15)",
-    color: "#fff",
-    borderRadius: 6,
-    padding: "4px 8px",
-    fontSize: 14,
-  };
   const pillBtn = (hovered) => ({
     background: "linear-gradient(90deg, #ff8a00, #e52e71)",
     color: color.white,
@@ -93,17 +45,7 @@ export default function App() {
     textDecoration: "none",
   });
 
-  // Custom hook to get the previous location
-  const usePreviousLocation = () => {
-    const location = useLocation();
-    const prevLocationRef = useRef(location);
-
-    useEffect(() => {
-      prevLocationRef.current = location;
-    }, [location]);
-
-    return prevLocationRef.current;
-  };
+  // --- Component Definitions ---
 
   const AppHeader = () => {
     const location = useLocation();
@@ -115,13 +57,8 @@ export default function App() {
     const isOnAboutPage = location.pathname === "/about";
     const isOnPrivacyPage = location.pathname === "/privacy";
 
-    // Check if we are on one of the secondary pages
     const onSecondaryPage = isOnFavoritePage || isOnAboutPage || isOnPrivacyPage;
-
-    // Show "Back to Results" if we are on a secondary page and we have the right navigation state.
     const showBackToResults = onSecondaryPage && location.state?.from === "results";
-
-    // If we are on the results page, set the state for the next navigation. Otherwise, preserve it.
     const navState = location.pathname.startsWith("/results") ? { from: "results" } : location.state;
 
     return (
@@ -163,32 +100,17 @@ export default function App() {
     );
   };
 
-  // A smaller component to handle the footer logic
   const AppFooter = () => {
     const location = useLocation();
-    const [isAboutHovered, setIsAboutHovered] = useState(false);
     const [isPrivacyHovered, setIsPrivacyHovered] = useState(false);
 
-    const isOnAboutPage = location.pathname === "/about";
     const isOnPrivacyPage = location.pathname === "/privacy";
-
-    // If we are on the results page, set the state for the next navigation. Otherwise, preserve it.
     const navState = location.pathname.startsWith("/results") ? { from: "results" } : location.state;
 
     return (
-      <footer style={bar}>
-        {/* About link on the left, or a placeholder to maintain spacing */}
-        {!isOnAboutPage ? (
-          <Link to="/about" state={navState}>
-            <button
-              style={pillBtn(isAboutHovered)}
-              onMouseEnter={() => setIsAboutHovered(true)}
-              onMouseLeave={() => setIsAboutHovered(false)}
-            >
-              About
-            </button>
-          </Link>
-        ) : <div />}
+      <footer style={{ ...bar, position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 1200 }}>
+        {/* Placeholder to maintain spacing */}
+        <div />
         {/* Privacy link on the right */}
         {!isOnPrivacyPage && (
           <Link to="/privacy" state={navState}>
@@ -205,35 +127,55 @@ export default function App() {
     );
   };
 
+  // --- Main Render Function ---
+
   return (
     <Router>
-      <div
-        style={{
-          fontFamily:
-            'system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif',
-          background: color.white,
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        {/* Top bar styled like Figma */}
-        <AppHeader />
-
-        {/* Main route content */}
-        <div style={{ flex: 1 }}>
-          <Routes>
-            <Route path="/" element={<SearchPage />} />
-            <Route path="/results" element={<ResultsPage />} />
-            <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/favorite" element={<FavoritePage />} />
-          </Routes>
-        </div>
-
-        {/* Footer styled like Figma */}
-        <AppFooter />
-      </div>
+      <AppContentWrapper
+        AppHeader={AppHeader}
+        AppFooter={AppFooter}
+        color={color}
+      />
     </Router>
   );
 }
+
+// Wrapper component to apply conditional styling using useLocation
+const AppContentWrapper = ({ AppHeader, AppFooter, color }) => {
+  const location = useLocation();
+  const isSearchPage = location.pathname === '/'; // Check if we are on the homepage
+
+  return (
+    <div
+      style={{
+        fontFamily:
+          'system-ui, -apple-system, "Segoe UI", Roboto, Inter, sans-serif',
+        background: color.white,
+        height: "100vh", 
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden", // Prevents scrollbar on the entire page
+      }}
+    >
+      <AppHeader />
+
+      {/* Main route content container */}
+      <div style={{ 
+        flex: 1, 
+        position: 'relative',
+        // CRITICAL FIX: Set overflow to 'hidden' only on the SearchPage, 'auto' otherwise.
+        // This makes sure the SearchPage doesn't scroll, but the other pages do.
+        overflowY: isSearchPage ? "hidden" : "auto", 
+      }}>
+        <Routes>
+          <Route path="/" element={<SearchPage />} />
+          <Route path="/results" element={<ResultsPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/favorite" element={<FavoritePage />} />
+        </Routes>
+      </div>
+      
+      <AppFooter />
+    </div>
+  );
+};
