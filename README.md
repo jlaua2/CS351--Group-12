@@ -35,7 +35,6 @@ Provide a brief explanation of the project. Example:
 ### **Frontend**
 
 - React
-- TailwindCSS / Material UI (or whatever you use)
 
 ### **Backend**
 
@@ -46,8 +45,8 @@ Provide a brief explanation of the project. Example:
 
 ## Features
 
-- 🎨 Modern React UI
-- 🚀 REST API with DRF
+- Modern React UI
+- REST API with DRF
 - SERPAPI querying
 
 ---
@@ -134,4 +133,28 @@ Provide a brief explanation of the project. Example:
 ├── requirements.txt
 └── venv
     └── guide.md
+```
+
+## Getting Started
+
+> ### Backend Setup (Django)
+
+```
+# API #
+Request an API key from SERPAPI found here: https://serpapi.com/users/sign_up
+Edit the .env.example file as instructed in the file pasting your API key and renaming
+the file
+
+git clone git@github.com:jlaua2/CS351--Group-12.git
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 backend/manage.py
+```
+
+> ### Frontend Setup (React)
+
+```
+cd frontend
+npm install
 ```
