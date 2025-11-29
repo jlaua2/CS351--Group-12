@@ -56,17 +56,31 @@ const SearchPage = () => {
       'system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif',
     color: color.ink,
     background: color.white,
-    minHeight: "100vh",
+    height: "100%",
     display: "flex",
     flexDirection: "column",
+    overflow: "hidden",
+    width: "100%",
+    maxHeight: "100%",
   };
 
   const container = {
     width: "100%",
-    maxWidth: 1080,
-    margin: "0 auto",
-    padding: "48px 24px 24px",
     flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    overflow: "hidden",
+    padding: "16px",
+  };
+
+  const contentWrapper = {
+    width: "100%",
+    maxWidth: 1080,
+    display: "flex",
+    flexDirection: "column",
+    gap: 24,
   };
 
   const hero = (mounted) => ({
@@ -160,14 +174,66 @@ const SearchPage = () => {
   const tagline = (mounted) => ({
     fontSize: "1.2rem",
     fontWeight: 600,
-    margin: "6px 0 28px",
+    margin: "6px 0 12px",
     opacity: mounted ? 1 : 0,
-    transition: "opacity 1s ease-in-out 0.2s", // Added a 0.2s delay
+    transition: "opacity 1s ease-in-out 0.2s",
     background: "linear-gradient(90deg, #ff8a00, #e52e71)",
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
     color: "transparent",
   });
+
+  const aboutSection = {
+    marginTop: 12,
+    paddingTop: 12,
+    borderTop: `1px solid ${color.border}`,
+  };
+
+  const aboutTitle = {
+    fontSize: 18,
+    fontWeight: 700,
+    marginBottom: 8,
+    color: color.ink,
+  };
+
+  const featureGrid = {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+    gap: 12,
+    marginTop: 12,
+  };
+
+  const featureCard = {
+    background: color.white,
+    border: `1px solid ${color.border}`,
+    borderRadius: 6,
+    padding: 12,
+    boxShadow: "0 1px 3px rgba(0,0,0,0.05)",
+    textAlign: "center",
+    fontSize: 13,
+  };
+
+  const iconWrapper = {
+    display: "inline-flex",
+    padding: 8,
+    borderRadius: "50%",
+    background: color.subtle,
+    marginBottom: 6,
+    color: color.dark,
+  };
+
+  const featureTitle = {
+    fontSize: 14,
+    fontWeight: 600,
+    marginBottom: 4,
+    color: color.ink,
+  };
+
+  const featureText = {
+    fontSize: 12,
+    color: "#666",
+    lineHeight: 1.4,
+  };
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -177,8 +243,6 @@ const SearchPage = () => {
 
   return (
     <div style={page}>
-
-      {/* Main content */}
       <main style={container}>
         <h1 style={hero(isMounted)}>
           Compare Prices.
