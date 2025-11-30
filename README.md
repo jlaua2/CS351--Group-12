@@ -13,12 +13,8 @@ _A price comparison tool leveraging Google search API_
 - [Getting Started](#getting-started)
   - [Backend Setup (Django)](#backend-setup-django)
   - [Frontend Setup (React)](#frontend-setup-react)
-- [Environment Variables](#environment-variables)
 - [API Documentation](#api-documentation)
-- [Running Tests](#running-tests)
-- [Deployment](#deployment)
 - [Screenshots](#screenshots)
-- [License](#license)
 
 ---
 
@@ -26,11 +22,11 @@ _A price comparison tool leveraging Google search API_
 
 Provide a brief explanation of the project. Example:
 
-> This project is a full-stack web application built with Django (REST API) and React (frontend). It provides a scalable architecture for modern web applications.
+> This project is a full-stack web application built with Django (REST API) and React (frontend). Which serves google api data to a react frontend and uses it to implement a cost comparison tool.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### **Frontend**
 
@@ -166,3 +162,11 @@ npm install
 npm run build
 npm start
 ```
+
+## API Documentation
+
+- [SERPAPI Documentation](https://serpapi.com/search-engine-apis)
+
+## Screenshots
+
+placeholder
