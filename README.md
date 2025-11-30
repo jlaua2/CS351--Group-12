@@ -13,10 +13,7 @@ _A price comparison tool leveraging Google search API_
 - [Getting Started](#getting-started)
   - [Backend Setup (Django)](#backend-setup-django)
   - [Frontend Setup (React)](#frontend-setup-react)
-- [Environment Variables](#environment-variables)
 - [API Documentation](#api-documentation)
-- [Running Tests](#running-tests)
-- [Deployment](#deployment)
 - [Screenshots](#screenshots)
 - [License](#license)
 
@@ -26,11 +23,11 @@ _A price comparison tool leveraging Google search API_
 
 Provide a brief explanation of the project. Example:
 
-> This project is a full-stack web application built with Django (REST API) and React (frontend). It provides a scalable architecture for modern web applications.
+> This project is a full-stack web application built with Django (REST API) and React (frontend). Which serves google api data to a react frontend and uses it to implement a cost comparison tool.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### **Frontend**
 
@@ -166,3 +163,21 @@ npm install
 npm run build
 npm start
 ```
+
+## API Documentation
+
+- [SERPAPI Documentation](https://serpapi.com/search-engine-apis)
+
+## License
+
+Released under MIT License
+
+Copyright (c) 2013 Mark Otto.
+
+Copyright (c) 2017 Andrew Fong.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
