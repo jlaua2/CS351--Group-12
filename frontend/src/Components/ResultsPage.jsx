@@ -151,8 +151,19 @@ const styles = {
     flex: 1,
     display: "flex",
     flexDirection: "column",
+    minHeight: 200,
+    justifyContent: "space-between"
   },
-  cardTitle: { fontSize: 18, fontWeight: 800, margin: 0, color: C.ink },
+  cardTitle: { 
+    fontSize: 18, 
+    fontWeight: 800, 
+    margin: 0, 
+    color: C.ink,
+    display: "-webkit-box",
+    WebkitLineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    overflow: "hidden" 
+  },
   priceRow: { marginTop: 8, color: "#222" },
   totalStrong: { fontWeight: 800 },
 
@@ -234,7 +245,13 @@ const ProductResultCard = ({ product }) => {
         />
 
         <div style={styles.cardDetails}>
-          <div>
+          <div style={{ 
+            height: 200,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            overflow: "hidden",
+           }}>
             <h4 style={styles.cardTitle}>{title}</h4>
             <div style={styles.priceRow}>Store: {store}</div>
             <div style={styles.priceRow}>Price: ${price.toFixed(2)}</div>
