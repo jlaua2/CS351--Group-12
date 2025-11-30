@@ -149,7 +149,13 @@ git clone git@github.com:jlaua2/CS351--Group-12.git
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-python3 backend/manage.py
+python3 backend/manage.py makemigrations
+python3 backend/manage.py migrate
+
+#Initial seed procedure
+python3 backend/manage.py shell
+>>> from api.seed import run
+>>> run()
 ```
 
 > ### Frontend Setup (React)
@@ -157,4 +163,6 @@ python3 backend/manage.py
 ```
 cd frontend
 npm install
+npm run build
+npm start
 ```
