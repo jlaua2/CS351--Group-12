@@ -22,7 +22,8 @@ _A price comparison tool leveraging Google search API_
 
 Provide a brief explanation of the project. Example:
 
-> This project is a full-stack web application built with Django (REST API) and React (frontend). Which serves google api data to a react frontend and uses it to implement a cost comparison tool.
+> This project is a full-stack web application built with Django (REST API) and React (frontend).
+> Which serves google API data to a react frontend and uses it to implement a cost comparison tool.
 
 ---
 
