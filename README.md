@@ -51,85 +51,82 @@ Provide a brief explanation of the project. Example:
 ## Project Structure
 
 ```
+.
 ├── backend
-│   ├── api
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-313.pyc
-│   │   │   ├── admin.cpython-313.pyc
-│   │   │   ├── apps.cpython-313.pyc
-│   │   │   ├── models.cpython-313.pyc
-│   │   │   ├── search_engine.cpython-313.pyc
-│   │   │   ├── seed.cpython-313.pyc
-│   │   │   ├── urls.cpython-313.pyc
-│   │   │   └── views.cpython-313.pyc
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── data_structures
-│   │   │   ├── __init__.py
-│   │   │   ├── __pycache__
-│   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │   │   ├── pricematchtrie.cpython-313.pyc
-│   │   │   │   ├── trie.cpython-313.pyc
-│   │   │   │   └── union.cpython-313.pyc
-│   │   │   ├── pricematchtrie.py
-│   │   │   ├── trie.py
-│   │   │   └── union.py
-│   │   ├── migrations
-│   │   │   ├── __init__.py
-│   │   │   ├── __pycache__
-│   │   │   │   ├── __init__.cpython-313.pyc
-│   │   │   │   └── 0001_initial.cpython-313.pyc
-│   │   │   └── 0001_initial.py
-│   │   ├── models.py
-│   │   ├── search_engine.py
-│   │   ├── seed.py
-│   │   ├── tests.py
-│   │   ├── urls.py
-│   │   └── views.py
-│   ├── backend
-│   │   ├── __init__.py
-│   │   ├── __pycache__
-│   │   │   ├── __init__.cpython-313.pyc
-│   │   │   ├── settings.cpython-313.pyc
-│   │   │   ├── urls.cpython-313.pyc
-│   │   │   └── wsgi.cpython-313.pyc
-│   │   ├── asgi.py
-│   │   ├── settings.py
-│   │   ├── urls.py
-│   │   └── wsgi.py
-│   ├── db.sqlite3
-│   ├── guide.md
-│   ├── manage.py
-│   └── package-lock.json
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── data_structures
+│   │   │   ├── __init__.py
+│   │   │   ├── pricematchtrie.py
+│   │   │   ├── trie.py
+│   │   │   └── union.py
+│   │   ├── migrations
+│   │   │   ├── __init__.py
+│   │   │   └── 0001_initial.py
+│   │   ├── models.py
+│   │   ├── search_engine.py
+│   │   ├── seed.py
+│   │   ├── tests.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   ├── backend
+│   │   ├── __init__.py
+│   │   ├── asgi.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   ├── guide.md
+│   ├── manage.py
+│   └── package-lock.json
 ├── demo_video
-│   └── guide.md
+│   └── guide.md
+├── figma_wireframe
+│   ├── guide.md
+│   ├── Markup_Doc
+│   ├── Markup_Document.txt
+│   ├── Screenshot 2025-10-22 at 11.44.13 PM.png
+│   └── Screenshot 2025-10-22 at 11.44.33 PM.png
 ├── frontend
-│   ├── build
-│   │   ├── asset-manifest.json
-│   │   └── index.html
-│   ├── guide.md
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── public
-│   │   └── index.html
-│   └── src
-│       ├── App.js
-│       ├── Components
-│       │   ├── AboutPage.jsx
-│       │   ├── App.jsx
-│       │   ├── FavoritePage.jsx
-│       │   ├── PrivacyPage.jsx
-│       │   ├── ResultsPage.jsx
-│       │   └── SearchPage.jsx
-│       ├── Data
-│       │   └── mockProducts.js
-│       ├── index.js
-│       └── utils
-│           └── favorites.js
+│   ├── build
+│   │   ├── asset-manifest.json
+│   │   └── index.html
+│   ├── guide.md
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   └── index.html
+│   └── src
+│       ├── App.js
+│       ├── Components
+│       │   ├── AboutPage.jsx
+│       │   ├── App.jsx
+│       │   ├── FavoritePage.jsx
+│       │   ├── PrivacyPage.jsx
+│       │   ├── ResultsPage.jsx
+│       │   └── SearchPage.jsx
+│       ├── Data
+│       │   └── mockProducts.js
+│       ├── index.js
+│       └── utils
+│           └── favorites.js
+├── README.md
+├── README.md.bak
 ├── requirements.txt
-└── venv
-    └── guide.md
+└── weekly_notes
+    ├── week10.md
+    ├── week11.md
+    ├── week12.md
+    ├── week13.md
+    ├── week14.md
+    ├── week15.md
+    ├── week16.md
+    ├── week5.md
+    ├── week6.md
+    ├── week7.md
+    ├── week8.md
+    └── week9.md
 ```
 
 ## Getting Started
@@ -170,4 +167,4 @@ npm start
 
 ## Screenshots
 
-placeholder
+![Homepage](media/homepage.png)
