@@ -150,6 +150,10 @@ python3 backend/manage.py migrate
 python3 backend/manage.py shell
 >>> from api.seed import run
 >>> run()
+>>> quit()
+
+# Run Procedure #
+python3 backend/manage.py runserver
 ```
 
 > ### Frontend Setup (React)
