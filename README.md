@@ -168,3 +168,5 @@ npm start
 ## Screenshots
 
 ![Homepage](media/homepage.png)
+![Privacy](media/privacy.png)
+![search](media/search.png)
